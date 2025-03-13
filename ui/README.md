@@ -47,5 +47,9 @@ O frontend estará acessível em: [http://localhost:8081](http://localhost:8081)
 
 ---
 
+## 📖 Instruções de como gerar os services para a ui
+Os services são gerados de modo automático a partir do código swagger.
+Para mais detalhes, consulte o [README openapi-generator](https://github.com/sagubr/guardiao-chaves/tree/master/ui/src/libs/openapi-generator/configuration#readme)
+
 ## 📖 Documentação Completa
 Para mais detalhes, consulte o [README principal](https://github.com/sagubr/guardiao-chaves/blob/master/README.md).
