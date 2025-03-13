@@ -87,12 +87,6 @@ DATASOURCES_DEFAULT_PASSWORD=postgres
 
 ---
 
-## 📌 Documentação da API
-Acesse a documentação **Swagger/OpenAPI** da API em:
-[http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
-
----
-
 ## 🛠️ Contribuição
 
 1. Faça um **fork** do repositório.

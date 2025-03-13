@@ -1,78 +1,67 @@
-## Micronaut 4.6.2 Documentation
+# 📦 Backend - Guardião de Chaves
 
-- [User Guide](https://docs.micronaut.io/4.6.2/guide/index.html)
-- [API Reference](https://docs.micronaut.io/4.6.2/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/4.6.2/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
+## 📋 Descrição
+O backend do sistema **Guardião de Chaves** é responsável por fornecer APIs RESTful para gerenciar o empréstimo e a devolução de chaves. Ele controla a autenticação, permissões e operações críticas, garantindo a segurança e rastreabilidade das chaves.
+
+## 🛠️ Tecnologias Utilizadas
+- **Micronaut (Java)**: Framework leve para microsserviços.
+- **PostgreSQL**: Banco de dados relacional para armazenamento de informações.
+- **Docker**: Containerização para ambientes replicáveis.
+- **Swagger/OpenAPI**: Documentação interativa da API.
+
+## 📂 Estrutura de Diretórios
+```
+app/
+├── build/ #após a compilcação do app
+│   ├── main/
+│   │    └── classes/java/main/
+│   │            └── META-INF/
+│   │                   └── swagger/key-keeper-0.0.yml  # Documentação OpenAPI (essencial para gerar código automático)
+├── src/
+│   ├── main/
+│   │    ├── java/github/sagubr/
+│   │    │        ├── controllers/  # Controladores REST
+│   │    │        ├── entities/       # Entidades do banco
+│   │    │        ├── repositories/ # Repositórios JPA
+│   │    │        └── services/     # Regras de negócio
+│   │    └── resources/
+│   │         ├── application.yml   # Configurações do Micronaut
+│   │         └── META-INF/
+│   │              └── swagger/     # Documentação OpenAPI
+│   └── test/                       # Testes unitários
+└── Dockerfile
+```
+
+## 📌 Configuração
+As variáveis sensíveis estão no arquivo `.env`. Exemplo:
+
+```env
+DEFAULT_DB_URL=jdbc:postgresql://db:5432/key_keeper
+DEFAULT_DB_USERNAME=postgres
+DEFAULT_DB_PASSWORD=postgres
+JWT_TOKEN_SECRET=minha-chave-secreta
+MASTER_USERNAME=admin
+MASTER_PASSWORD=123456
+SENDGRID_API_KEY=sua-chave-aqui
+```
+
+## 🚀 Como Executar o Backend
+1. Certifique-se de ter o Docker instalado.
+2. Execute o seguinte comando na raiz do projeto:
+
+```bash
+docker-compose up --build
+```
+O backend estará acessível em: [http://localhost:8080](http://localhost:8080)
 
 ---
 
-- [Micronaut Gradle Plugin documentation](https://micronaut-projects.github.io/micronaut-gradle-plugin/latest/)
-- [GraalVM Gradle Plugin documentation](https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html)
-- [Shadow Gradle Plugin](https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow)
-
-## Feature liquibase documentation
-
-- [Micronaut Liquibase Database Migration documentation](https://micronaut-projects.github.io/micronaut-liquibase/latest/guide/index.html)
-
-- [https://www.liquibase.org/](https://www.liquibase.org/)
-
-## Feature openapi documentation
-
-- [Micronaut OpenAPI Support documentation](https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html)
-
-- [https://www.openapis.org](https://www.openapis.org)
-
-## Feature micronaut-aot documentation
-
-- [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
-
-## Feature security-jwt documentation
-
-- [Micronaut Security JWT documentation](https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html)
-
-## Feature swagger-ui documentation
-
-- [Micronaut Swagger UI documentation](https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html)
-
-- [https://swagger.io/tools/swagger-ui/](https://swagger.io/tools/swagger-ui/)
-
-## Feature test-resources documentation
-
-- [Micronaut Test Resources documentation](https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/)
-
-## Feature lombok documentation
-
-- [Micronaut Project Lombok documentation](https://docs.micronaut.io/latest/guide/index.html#lombok)
-
-- [https://projectlombok.org/features/all](https://projectlombok.org/features/all)
-
-## Feature jdbc-hikari documentation
-
-- [Micronaut Hikari JDBC Connection Pool documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc)
-
-## Feature serialization-jackson documentation
-
-- [Micronaut Serialization Jackson Core documentation](https://micronaut-projects.github.io/micronaut-serialization/latest/guide/)
+## 📌 Documentação da API
+Acesse a documentação **Swagger/OpenAPI** da API em:
+[http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
 
 
-```mermaid
-graph TD;
-    A["Controller: Exposição de APIs, recebe requisições HTTP"]
-    B["Service: Regras de negócio, processamento dos dados"]
-    C["Repository: Acesso ao banco de dados, gerencia consultas e persistência"]
-    D["Entities: Modelos do banco de dados, mapeamento ORM"]
-    E["Model: DTOs, transferência de dados entre camadas"]
-    F["Config: Configurações gerais da aplicação"]
-    G["Security: Gerenciamento de autenticação e segurança"]
-    H["Util: Utilitários e helpers, funções auxiliares"]
-    
-    A --> B
-    B --> C
-    C --> D
-    D --> E
-    E --> F
-    F --> G
-    G --> H
+## 📖 Documentação Completa
+Para mais detalhes, consulte o [README principal](https://github.com/sagubr/guardiao-chaves/blob/master/README.md).
 
 
