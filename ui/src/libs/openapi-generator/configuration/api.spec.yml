@@ -1,0 +1,2150 @@
+openapi: 3.0.1
+info:
+    title: key-keeper
+    version: "0.0"
+servers:
+    - url: http://localhost:8080/
+security:
+    - Authorization: []
+tags:
+    - name: JobTitle
+      description: Operações relacionadas a entidade cargo
+    - name: Email
+      description: Operações relacionadas a envio de e-mail
+    - name: Facility
+      description: Operações relacionadas a entidade lugar
+    - name: Users
+      description: Classe referência para Usuário
+    - name: Logging
+      description: Operações relacionadas a entidade Permissão
+    - name: Assignment
+      description: Classe referência para Atribuição
+    - name: LocationType
+      description: Classe referência para Tipos de Ambiente
+    - name: Requester
+      description: Classe referência para Solicitantes
+    - name: Permission
+      description: Operações relacionadas a entidade Permissão
+    - name: Location
+      description: Classe referência para Localização
+    - name: Key
+      description: Operações relacionadas a entidade Chaves
+    - name: Reservation
+      description: Classe referência para Reservas
+    - name: Notifications
+      description: Operações relacionadas a entidade Notificação
+paths:
+    /api/assignment:
+        get:
+            tags:
+                - Assignment
+            summary: Obter todos os registros da classe atribuição
+            operationId: findByActiveTrueAssignment
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Assignment"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/assignment/save:
+        post:
+            tags:
+                - Assignment
+            summary: Criar novo registro na classe atribuição
+            operationId: createAssignment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Assignment"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Assignment"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/assignment/update:
+        put:
+            tags:
+                - Assignment
+            summary: Criar novo registro na classe atribuição
+            operationId: updateAssignment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/AssignmentCommand"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Assignment"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/facility:
+        get:
+            tags:
+                - Facility
+            summary: Obter todas as instalações
+            operationId: findAllFacilities
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Facility"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/facility/save:
+        post:
+            tags:
+                - Facility
+            summary: Criar nova instalação
+            operationId: addFacility
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Facility"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Facility"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/job-title:
+        get:
+            tags:
+                - JobTitle
+            summary: Obter todos os cargos
+            operationId: findAllJobTitle
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/JobTitle"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/job-title/save:
+        post:
+            tags:
+                - JobTitle
+            summary: Criar novo cargo
+            operationId: addJobTitle
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/JobTitle"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/JobTitle"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/job-title/update:
+        patch:
+            tags:
+                - JobTitle
+            summary: Atualizar um registro na classe cargo
+            operationId: updateJobTitle
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/JobTitle"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/JobTitle"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/key:
+        get:
+            tags:
+                - Key
+            summary: Obter todas as chaves
+            operationId: findAllKeys
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Key"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/key/location:
+        post:
+            tags:
+                - Key
+            summary: Obter chaves por localização
+            operationId: findByLocation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Location"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Key"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/key/save:
+        post:
+            tags:
+                - Key
+            summary: Criar novo cargo
+            operationId: addKey
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Key"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Key"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/key/update:
+        post:
+            tags:
+                - Key
+            summary: Atualizar cargo existente
+            operationId: updateKey
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Key"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Key"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/location:
+        get:
+            tags:
+                - Location
+            summary: Obter todos os registros da classe localização
+            operationId: findAllLocation
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Location"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/location-type:
+        get:
+            tags:
+                - LocationType
+            summary: Obter todos os registros da classe tipos de ambiente
+            operationId: findAllLocationType
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/LocationType"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/location-type/save:
+        post:
+            tags:
+                - LocationType
+            summary: Criar novo registro na classe tipos de ambiente
+            operationId: createLocationType
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/LocationType"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/LocationType"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/location/not-restricted:
+        get:
+            tags:
+                - Location
+            summary: Obter todos os registros da classe localização que não sejam restritos
+                e que não sejam publicos
+            operationId: findByRestrictedFalseAndPublicFalse
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Location"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/location/public:
+        get:
+            tags:
+                - Location
+            summary: Obter todos os registros da classe localização que não sejam restritos
+                e que sejam publicos
+            operationId: findByRestrictedFalseAndPublicTrue
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Location"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/location/responsible/{requesterId}:
+        get:
+            tags:
+                - Location
+            summary: Obter todos os registros da classe localização filtrados por requesterId
+            operationId: findByResponsiblesId
+            parameters:
+                - name: requesterId
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      format: uuid
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Location"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/location/save:
+        post:
+            tags:
+                - Location
+            summary: Criar novo registro na classe localização
+            operationId: createLocation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Location"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Location"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/location/{id}:
+        get:
+            tags:
+                - Location
+            summary: Obter todos os registros da classe localização filtrados por permissionId
+            operationId: findByIdLocation
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      format: uuid
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Location"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/permissions:
+        get:
+            tags:
+                - Permission
+            summary: Obter todas as permissões
+            operationId: findAllPermission
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Permission"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/permissions/delete:
+        delete:
+            tags:
+                - Permission
+            summary: Excluir uma permissão
+            operationId: deletePermission
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Permission"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/permissions/requester/{id}:
+        get:
+            tags:
+                - Permission
+            summary: Obter todas as permissões por solicitantes
+            operationId: findByRequestersIdAndEndDateTimeAfter
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      minLength: 1
+                      type: string
+                      format: uuid
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/PermissionLocationSummaryDto"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/permissions/save:
+        post:
+            tags:
+                - Permission
+            summary: Criar uma nova permissão
+            operationId: createPermission
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Permission"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Permission"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/permissions/update:
+        put:
+            tags:
+                - Permission
+            summary: Atualizar uma permissão existente
+            operationId: updatePermission
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Permission"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Permission"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/permissions/{id}:
+        get:
+            tags:
+                - Permission
+            summary: Obter permissão por ID
+            operationId: findByIdPermission
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      minLength: 1
+                      type: string
+                      format: uuid
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Permission"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+        delete:
+            tags:
+                - Permission
+            summary: Excluir permissão por ID
+            operationId: deleteByIdPermission
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      format: uuid
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/requesters:
+        get:
+            tags:
+                - Requester
+            summary: Obter todos os registros da classe solicitantes
+            operationId: findAllRequester
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Requester"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/requesters/blocked-false:
+        get:
+            tags:
+                - Requester
+            summary: Obter todos os registros da classe solicitantes filtrados por bloqueado=false
+            operationId: findByBlockedFalse
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Requester"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/requesters/delete:
+        delete:
+            tags:
+                - Requester
+            summary: Excluir um registro da classe solicitantes
+            operationId: deleteRequester
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Requester"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/requesters/delete/{id}:
+        delete:
+            tags:
+                - Requester
+            summary: Excluir um registro da classe solicitantes pelo ID
+            operationId: deleteRequesterById
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      format: uuid
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/requesters/responsible:
+        get:
+            tags:
+                - Requester
+            summary: Obter todos os registros da classe solicitantes filtrados por responsável=true
+            operationId: findAllRequesterByResponsibleTrue
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Requester"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/requesters/save:
+        post:
+            tags:
+                - Requester
+            summary: Criar novo registro na classe solicitantes
+            operationId: createRequester
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Requester"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Requester"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/requesters/update:
+        put:
+            tags:
+                - Requester
+            summary: Atualizar um registro na classe solicitantes
+            operationId: updateRequester
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Requester"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Requester"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/requesters/{id}:
+        get:
+            tags:
+                - Requester
+            summary: Obter um solicitante pelo ID
+            operationId: findRequesterById
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      format: uuid
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Requester"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/reservations:
+        get:
+            tags:
+                - Reservation
+            summary: Obter todos os registros da classe reservas
+            operationId: findByActiveTrueReservation
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Reservation"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/reservations/active:
+        post:
+            tags:
+                - Reservation
+            summary: Atualizar campo ativo de uma reserva
+            operationId: updateActiveReservation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Reservation"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/reservations/change-status:
+        post:
+            tags:
+                - Reservation
+            summary: Atualizar status de uma reserva
+            operationId: changeStatusReservation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ReservationChangeStatusCommand"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/reservations/delete/{id}:
+        delete:
+            tags:
+                - Reservation
+            summary: Excluir uma reserva por ID
+            operationId: deleteByIdReservation
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      format: uuid
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/reservations/save:
+        post:
+            tags:
+                - Reservation
+            summary: Criar nova reserva
+            operationId: createReservation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ReservationCommand"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Reservation"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/reservations/status:
+        get:
+            tags:
+                - Reservation
+            summary: Obter todas as reservas filtradas por status
+            operationId: findByActiveTrueAndStatusIn
+            parameters:
+                - name: status
+                  in: query
+                  required: true
+                  schema:
+                      type: array
+                      items:
+                          $ref: "#/components/schemas/Status"
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Reservation"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/reservations/update:
+        put:
+            tags:
+                - Reservation
+            summary: Atualizar uma reserva
+            operationId: updateReservation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ReservationProlongationCommand"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Reservation"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/reservations/{id}:
+        get:
+            tags:
+                - Reservation
+            summary: Obter reserva por ID
+            operationId: findByIdReservation
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      format: uuid
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Reservation"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/users:
+        get:
+            tags:
+                - Users
+            summary: Obter todos os registros da classe usuário
+            operationId: findAllUser
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/User"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/users/save:
+        post:
+            tags:
+                - Users
+            summary: Criar novo registro na classe usuário
+            operationId: createUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/User"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/User"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/users/summary:
+        get:
+            tags:
+                - Users
+            summary: Obter todos os registros da classe usuário resumido
+            operationId: findAllUserSummaries
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/UserSummaryDto"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/users/update:
+        put:
+            tags:
+                - Users
+            summary: Atualizar um registro existente na classe usuário
+            operationId: updateUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/User"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/User"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /logging/get:
+        get:
+            tags:
+                - Logging
+            operationId: streamLogging
+            responses:
+                "200":
+                    description: streamLogging 200 response
+                    content:
+                        text/event-stream:
+                            schema:
+                                $ref: "#/components/schemas/Event_LoggingEvent_"
+    /mail/send:
+        post:
+            tags:
+                - Email
+            operationId: send
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                to:
+                                    type: string
+                required: true
+            responses:
+                "200":
+                    description: send 200 response
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+    /notifications/pop-up:
+        get:
+            tags:
+                - Notifications
+            summary: Obter todos os registros da classe notificação que não tenham sido
+                lidos
+            operationId: findByReadFalse
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Notification"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /notifications/read/{notificationId}:
+        post:
+            tags:
+                - Notifications
+            summary: Marcar o registro de notificação como lida
+            operationId: markAsRead
+            parameters:
+                - name: notificationId
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      format: uuid
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Notification"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+components:
+    schemas:
+        Assignment:
+            required:
+                - name
+            type: object
+            allOf:
+                - $ref: "#/components/schemas/EntityPattern"
+                - properties:
+                      name:
+                          type: string
+                      permissions:
+                          type: array
+                          items:
+                              $ref: "#/components/schemas/Permissions"
+        AssignmentCommand:
+            required:
+                - assignmentId
+                - name
+                - permissions
+            type: object
+            properties:
+                assignmentId:
+                    type: string
+                    format: uuid
+                name:
+                    type: string
+                permissions:
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/Permissions"
+        EntityPattern:
+            type: object
+            properties:
+                id:
+                    type: string
+                    format: uuid
+                    nullable: true
+                version:
+                    type: integer
+                    format: int32
+                active:
+                    type: boolean
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+        Event_LoggingEvent_:
+            type: object
+            properties:
+                data:
+                    $ref: "#/components/schemas/LoggingEvent"
+                id:
+                    type: string
+                name:
+                    type: string
+                comment:
+                    type: string
+                retry:
+                    type: string
+        Facility:
+            required:
+                - name
+            type: object
+            allOf:
+                - $ref: "#/components/schemas/EntityPattern"
+                - properties:
+                      name:
+                          type: string
+                      description:
+                          type: string
+        JobTitle:
+            required:
+                - name
+            type: object
+            allOf:
+                - $ref: "#/components/schemas/EntityPattern"
+                - properties:
+                      name:
+                          type: string
+                      description:
+                          type: string
+                      history:
+                          type: object
+                          additionalProperties: true
+        Key:
+            required:
+                - code
+                - description
+                - keyType
+                - location
+            type: object
+            allOf:
+                - $ref: "#/components/schemas/EntityPattern"
+                - properties:
+                      code:
+                          type: integer
+                          format: int64
+                      description:
+                          type: string
+                      location:
+                          $ref: "#/components/schemas/Location"
+                      keyType:
+                          $ref: "#/components/schemas/KeyType"
+        KeyType:
+            type: string
+            enum:
+                - PRINCIPAL
+                - SECUNDARIA
+        Location:
+            required:
+                - facility
+                - locationType
+                - name
+            type: object
+            allOf:
+                - $ref: "#/components/schemas/EntityPattern"
+                - properties:
+                      name:
+                          type: string
+                      description:
+                          type: string
+                      facility:
+                          $ref: "#/components/schemas/Facility"
+                      locationType:
+                          $ref: "#/components/schemas/LocationType"
+                      maxCapacity:
+                          type: integer
+                          format: int32
+                      publicAccess:
+                          type: boolean
+                      restricted:
+                          type: boolean
+                      openingTime:
+                          type: string
+                          format: date-time
+                      closingTime:
+                          type: string
+                          format: date-time
+                      responsibles:
+                          type: array
+                          items:
+                              $ref: "#/components/schemas/Requester"
+        LocationType:
+            required:
+                - name
+            type: object
+            allOf:
+                - $ref: "#/components/schemas/EntityPattern"
+                - properties:
+                      name:
+                          type: string
+                      description:
+                          type: string
+        LoggingEvent:
+            required:
+                - level
+                - message
+            type: object
+            properties:
+                level:
+                    type: string
+                message:
+                    type: string
+        Notification:
+            required:
+                - name
+            type: object
+            allOf:
+                - $ref: "#/components/schemas/EntityPattern"
+                - properties:
+                      name:
+                          type: string
+                      reservation:
+                          nullable: true
+                          allOf:
+                              - $ref: "#/components/schemas/Reservation"
+                      metadata:
+                          type: object
+                          additionalProperties:
+                              type: string
+                      read:
+                          type: boolean
+                      send:
+                          type: boolean
+        Permission:
+            required:
+                - endDateTime
+                - startDateTime
+            type: object
+            allOf:
+                - $ref: "#/components/schemas/EntityPattern"
+                - properties:
+                      overdue:
+                          type: boolean
+                      locations:
+                          type: array
+                          items:
+                              $ref: "#/components/schemas/Location"
+                      requesters:
+                          type: array
+                          items:
+                              $ref: "#/components/schemas/Requester"
+                      user:
+                          nullable: true
+                          allOf:
+                              - $ref: "#/components/schemas/User"
+                      description:
+                          type: string
+                      startDateTime:
+                          type: string
+                          format: date-time
+                      endDateTime:
+                          type: string
+                          format: date-time
+        PermissionLocationSummaryDto:
+            required:
+                - endDateTime
+                - location
+                - permissionId
+                - startDateTime
+            type: object
+            properties:
+                permissionId:
+                    type: string
+                    format: uuid
+                location:
+                    $ref: "#/components/schemas/Location"
+                startDateTime:
+                    type: string
+                    format: date-time
+                endDateTime:
+                    type: string
+                    format: date-time
+        Permissions:
+            type: string
+            enum:
+                - VER_EMPRESTIMOS
+                - EDITAR_EMPRESTIMOS
+                - VER_HISTORICOS
+                - EDITAR_HISTORICOS
+                - VER_SOLICITANTES
+                - EDITAR_SOLICITANTES
+                - VER_PERMISSOES
+                - EDITAR_PERMISSOES
+                - VER_SALAS
+                - EDITAR_SALAS
+                - VER_TIPO_AMBIENTE
+                - EDITAR_TIPO_AMBIENTE
+                - VER_INSTALACOES
+                - EDITAR_INSTALACOES
+                - VER_CARGOS
+                - EDITAR_CARGOS
+                - VER_CONFIGURACAO
+                - EDITAR_CONFIGURACAO
+                - VER_USUARIOS
+                - EDITAR_USUARIOS
+        Requester:
+            required:
+                - blocked
+                - name
+                - responsible
+            type: object
+            allOf:
+                - $ref: "#/components/schemas/EntityPattern"
+                - properties:
+                      name:
+                          type: string
+                      emails:
+                          type: array
+                          items:
+                              type: string
+                      register:
+                          type: string
+                      jobTitle:
+                          nullable: true
+                          allOf:
+                              - $ref: "#/components/schemas/JobTitle"
+                      responsible:
+                          type: boolean
+                      blocked:
+                          type: boolean
+        Reservation:
+            required:
+                - endDateTime
+                - startDateTime
+                - status
+            type: object
+            allOf:
+                - $ref: "#/components/schemas/EntityPattern"
+                - properties:
+                      overdue:
+                          type: boolean
+                      formattedPeriod:
+                          type: string
+                      permission:
+                          nullable: true
+                          allOf:
+                              - $ref: "#/components/schemas/Permission"
+                      requester:
+                          nullable: true
+                          allOf:
+                              - $ref: "#/components/schemas/Requester"
+                      location:
+                          nullable: true
+                          allOf:
+                              - $ref: "#/components/schemas/Location"
+                      user:
+                          nullable: true
+                          allOf:
+                              - $ref: "#/components/schemas/User"
+                      key:
+                          nullable: true
+                          allOf:
+                              - $ref: "#/components/schemas/Key"
+                      notes:
+                          type: string
+                      startDateTime:
+                          type: string
+                          format: date-time
+                      endDateTime:
+                          type: string
+                          format: date-time
+                      status:
+                          $ref: "#/components/schemas/Status"
+                      notification:
+                          type: boolean
+        ReservationChangeStatusCommand:
+            required:
+                - reservationId
+                - status
+            type: object
+            properties:
+                reservationId:
+                    type: string
+                    format: uuid
+                status:
+                    $ref: "#/components/schemas/Status"
+        ReservationCommand:
+            required:
+                - endDateTime
+                - key
+                - permission
+                - requester
+                - startDateTime
+                - status
+            type: object
+            properties:
+                requester:
+                    $ref: "#/components/schemas/Requester"
+                status:
+                    $ref: "#/components/schemas/Status"
+                permission:
+                    $ref: "#/components/schemas/PermissionLocationSummaryDto"
+                key:
+                    $ref: "#/components/schemas/Key"
+                startDateTime:
+                    type: string
+                    format: date-time
+                endDateTime:
+                    type: string
+                    format: date-time
+        ReservationProlongationCommand:
+            required:
+                - endDateTime
+                - reservationId
+                - startDateTime
+            type: object
+            properties:
+                reservationId:
+                    type: string
+                    format: uuid
+                startDateTime:
+                    type: string
+                    format: date-time
+                endDateTime:
+                    type: string
+                    format: date-time
+        Status:
+            type: string
+            enum:
+                - EMPRESTIMO
+                - AGENDADO
+                - ATRASADO
+                - CANCELADO
+                - CONCLUIDO
+        User:
+            required:
+                - email
+                - firstAccess
+                - name
+                - password
+                - username
+            type: object
+            allOf:
+                - $ref: "#/components/schemas/EntityPattern"
+                - properties:
+                      name:
+                          type: string
+                      username:
+                          type: string
+                      email:
+                          type: string
+                      password:
+                          type: string
+                      firstAccess:
+                          type: boolean
+                      assignment:
+                          nullable: true
+                          allOf:
+                              - $ref: "#/components/schemas/Assignment"
+        UserSummaryDto:
+            required:
+                - assignment
+                - email
+                - name
+                - username
+            type: object
+            properties:
+                name:
+                    type: string
+                username:
+                    type: string
+                email:
+                    type: string
+                assignment:
+                    type: string
+    securitySchemes:
+        Authorization:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT

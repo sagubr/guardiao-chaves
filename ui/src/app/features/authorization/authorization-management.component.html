@@ -1,0 +1,25 @@
+<div class="content h2">
+	Gerenciamento de Autorizações
+</div>
+<mat-tab-group mat-stretch-tabs
+			   [class]="'stretched-tabs mat-elevation-z2 selected-tab-{{tabGroup.selectedIndex}}'"
+			   [color]="'warn'"
+			   [selectedIndex]="getSelectedIndex()"
+			   (selectedIndexChange)="onTabChange($event)"
+>
+	<mat-tab [routerLink]="['/autorizacoes/solicitantes']">
+		<ng-template mat-tab-label>
+			<mat-icon class="tab-icon">person_search</mat-icon>
+			Solicitantes
+		</ng-template>
+		<app-requester-datatable></app-requester-datatable>
+	</mat-tab>
+	<mat-tab [routerLink]="['/autorizacoes/permissoes']">
+		<ng-template mat-tab-label>
+			<mat-icon class="tab-icon">vpn_key</mat-icon>
+			Permissões
+		</ng-template>
+		<app-permission-datatable></app-permission-datatable>
+	</mat-tab>
+</mat-tab-group>
+

@@ -1,0 +1,144 @@
+<mat-toolbar>
+	<mat-toolbar-row class="toolbar-row">
+		<mat-form-field appearance="outline">
+			<mat-label>Buscar</mat-label>
+			<input class="input" matInput (keyup)="onSearch($event)" placeholder="Pesquisar usuários...">
+			<mat-icon matSuffix>search</mat-icon>
+		</mat-form-field>
+		<span class="spacer"></span>
+		<div class="actions">
+			<button mat-fab extended
+					class="button-primary"
+					type="button"
+					aria-label="Atualizar"
+					(click)="onReload()">
+				<mat-icon>refresh</mat-icon>
+				<span>Atualizar</span>
+			</button>
+			<button mat-fab extended
+					class="button-primary"
+					type="button"
+					aria-label="Adicionar"
+					(click)="openCreateDialog()">
+				<mat-icon>add_circle</mat-icon>
+				<span>Adicionar</span>
+			</button>
+		</div>
+	</mat-toolbar-row>
+</mat-toolbar>
+
+<div tabindex="0" class="full-width">
+	@if (loading) {
+		<mat-progress-bar mode="query"></mat-progress-bar>
+	}
+	<div class="container mat-elevation-z8">
+		<div class="mat-table-container">
+			<div class="table-wrapper">
+				<table-wrapper [dataSource]="dataSource" [columns]="columns"
+							   matSort #sort="matSort">
+
+					<ng-container matColumnDef="info">
+						<th mat-header-cell *matHeaderCellDef class="mat-header-cell">Situação</th>
+						<td mat-cell *matCellDef="let element">
+							<div class="cell-content-wrapper">
+								@switch (element.status) {
+									@case (Status.Agendado) {
+										<button mat-flat-button class="tag agendado" disabled>
+											<mat-icon>event_busy</mat-icon>
+											{{ Status.Agendado | uppercase }}
+										</button>
+									}
+									@case (Status.Emprestimo) {
+										<button mat-flat-button class="tag em-andamento" disabled>
+											<mat-icon> access_time</mat-icon>
+											{{ Status.Emprestimo | uppercase }}
+										</button>
+									}
+									@case (Status.Atrasado) {
+										<button mat-flat-button class="tag atrasado" disabled>
+											<mat-icon>hourglass_bottom</mat-icon>
+											{{ Status.Atrasado | uppercase }}
+										</button>
+									}
+								}
+							</div>
+						</td>
+					</ng-container>
+					<ng-container matColumnDef="action">
+						<th mat-header-cell
+							class="mat-header-cell"
+							*matHeaderCellDef mat-sort-header>Aceitar
+						</th>
+						<td mat-cell *matCellDef="let element">
+							@switch (element.status) {
+								@case (Status.Agendado) {
+									<button mat-flat-button
+											color="primary"
+											(click)="openDialogConfirmChangeStatus(element, Status.Emprestimo)">
+										<mat-icon>play_arrow</mat-icon>
+										Iniciar
+									</button>
+								}
+								@case (Status.Emprestimo) {
+									<button mat-flat-button
+											color="warn"
+											(click)="openDialogConfirmChangeStatus(element, Status.Concluido)">
+										<mat-icon>check_circle</mat-icon>
+										Concluir
+									</button>
+								}
+								@case (Status.Atrasado) {
+									<button mat-flat-button
+											(click)="openDialogConfirmChangeStatus(element, Status.Concluido)">
+										<mat-icon>check_circle</mat-icon>
+										Concluir
+									</button>
+								}
+							}
+						</td>
+					</ng-container>
+					<ng-container matColumnDef="menu" stickyEnd>
+						<th mat-header-cell
+							class="mat-header-cell"
+							*matHeaderCellDef>Ações
+						</th>
+						<td mat-cell
+							*matCellDef="let element">
+							<button mat-icon-button [matMenuTriggerFor]="menu">
+								<mat-icon>more_vert</mat-icon>
+							</button>
+							<mat-menu #menu="matMenu">
+								<button mat-menu-item>
+									<mat-icon>help</mat-icon>
+									<span>Mais informações</span>
+								</button>
+								<button mat-menu-item
+										(click)="openProlongationDialog(element)"
+								>
+									<mat-icon>more_time</mat-icon>
+									<span>Prorrogar</span>
+								</button>
+								<button mat-menu-item
+										(click)="openDialogConfirmChangeStatus(element, Status.Cancelado)">
+									<mat-icon>cancel</mat-icon>
+									<span>Cancelar</span>
+								</button>
+							</mat-menu>
+						</td>
+					</ng-container>
+					<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+					<tr mat-row
+						class="mat-row"
+						*matRowDef="let row; columns: displayedColumns;"></tr>
+
+					<tr class="mat-row-no-data" *matNoDataRow>
+						<td colspan="7">Não há usuários cadastrados</td>
+					</tr>
+				</table-wrapper>
+			</div>
+		</div>
+	</div>
+	<div class="paginator">
+		<mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+	</div>
+</div>

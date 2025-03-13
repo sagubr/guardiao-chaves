@@ -1,0 +1,87 @@
+@use 'colors';
+
+.login-page {
+	display: flex;
+	height: 100%;
+	background-color: var(--background);
+
+	.login-banner {
+		flex: 1;
+		background-color: var(--primary);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: var(--background);
+		text-align: center;
+		padding: 20px;
+
+		.banner-content {
+			img {
+				width: 80px;
+				margin-bottom: 20px;
+			}
+
+			h1 {
+				margin: 10px 0;
+				font-size: 24px;
+			}
+
+			p {
+				font-size: 16px;
+			}
+		}
+	}
+
+	.login-form {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		mat-card {
+			width: 350px;
+			padding: 30px;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+			mat-card-title {
+				text-align: center;
+				font-size: 22px;
+				font-weight: bold;
+				margin-bottom: 20px;
+			}
+
+			.full-width {
+				width: 100%;
+				margin-bottom: 20px;
+			}
+
+			.forgot-password {
+				display: block;
+				text-align: right;
+				font-size: 14px;
+				color: var(--primary);
+				margin-bottom: 20px;
+				text-decoration: none;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+
+			.login-button {
+				background-color: var(--primary);
+				color: var(--background);
+				width: 100%;
+
+				&:hover {
+					background-color: var(--primary);
+				}
+			}
+
+			.error-message {
+				color: var(--danger);
+				text-align: center;
+			}
+		}
+	}
+}

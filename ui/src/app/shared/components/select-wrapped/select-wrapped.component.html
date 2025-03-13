@@ -1,0 +1,63 @@
+<mat-form-field appearance="outline" class="full-width">
+	<mat-label>{{ placeholder() }}</mat-label>
+
+	<mat-select
+		class="select"
+		[ngClass]="{ 'loading-state': isLoading() }"
+		(selectionChange)="selectOption($event.value)"
+		[disabled]="isLoading() || options().length === 0"
+		panelClass="custom-select-panel"
+		[multiple]="multiple()"
+		[(ngModel)]="selectedOptions"
+		#mySelect
+	>
+		<div class="search-container">
+			<mat-icon class="search-icon">search</mat-icon>
+			<input
+				matInput
+				placeholder="Buscar..."
+				[(ngModel)]="searchTerm"
+				(input)="filterOptions()"
+				class="search-input"
+				(click)="$event.preventDefault()"
+			/>
+			@if (searchTerm !== '') {
+				<mat-icon class="search-icon-cancel" (click)="clearTerm()">cancel</mat-icon>
+			}
+		</div>
+
+		@if (multiple()) {
+
+			<mat-option (click)="toggleAllSelection()">
+				Selecionar todos
+			</mat-option>
+		}
+
+		@for (option of filteredOptions; track option) {
+			<mat-option [value]="option">
+				{{ displayFn()(option) }}
+			</mat-option>
+		}
+
+		@if (filteredOptions.length === 0) {
+			<mat-option disabled>
+				Nenhuma opção encontrada
+			</mat-option>
+		}
+
+	</mat-select>
+
+	<mat-hint>{{ hint() }}</mat-hint>
+
+	@if (selected.invalid) {
+		<mat-error>
+			{{ getErrorMessage() }}
+		</mat-error>
+	}
+
+	@if (isLoading()) {
+		<div class="internal-spinner">
+			<mat-spinner matSuffix diameter="20"></mat-spinner>
+		</div>
+	}
+</mat-form-field>

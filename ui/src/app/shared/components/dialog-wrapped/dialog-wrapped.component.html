@@ -1,0 +1,35 @@
+<div class="dialog-header">
+	<button mat-icon-button (click)="close(false)" mat-dialog-close>
+		<mat-icon class="icon-medium">close</mat-icon>
+	</button>
+</div>
+
+<div class="dialog-icon">
+	<mat-icon class="icon-extra-large icon-info">{{ getIcon() }}</mat-icon>
+</div>
+
+<div class="dialog-title">
+	<span mat-dialog-title
+		  class="h2"
+	> {{ data.title }}</span>
+</div>
+
+<mat-dialog-content class="dialog-content">
+	<span class="body-3">{{ data.message }}</span>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<div class="dialog-actions">
+		@if (data.hideCancel) {
+			<button mat-button
+					(click)="close(false)">
+				{{ data.cancelText || 'Cancelar' }}
+			</button>
+		}
+		<button mat-flat-button
+				class="button-primary"
+				(click)="close(true)">
+			{{ data.confirmText || 'Confirmar' }}
+		</button>
+	</div>
+</mat-dialog-actions>

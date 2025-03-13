@@ -1,0 +1,95 @@
+micronaut:
+    application:
+        name: core
+    router:
+        static-resources:
+            swagger:
+                paths: classpath:META-INF/swagger
+                mapping: /swagger/**
+            swagger-ui:
+                paths: classpath:META-INF/swagger/views/swagger-ui
+                mapping: /swagger-ui/**
+    security:
+        enabled: true
+        authentication: bearer
+        intercept-url-map:
+            -   pattern: /swagger-ui/**
+                access:
+                    - isAnonymous()
+            -   pattern: /swagger/**
+                access:
+                    - isAnonymous()
+        token:
+            jwt:
+                signatures:
+                    secret:
+                        generator:
+                            secret: ${JWT_TOKEN_SECRET:qrD6h8K6S9503Q06Y6Rfk21TErImPYqa}
+                generator:
+                    access-token-expiration: 21600
+                    refresh-token-expiration: 86400
+
+    cache:
+        enabled: false
+        caffeine:
+            api-cache:
+                maximum-size: 1000
+                expire-after-write: 5m
+
+    server:
+        cors:
+            enabled: true
+            allowed-origins:
+                - "http://localhost:4200"
+            allowed-methods:
+                - GET
+                - POST
+                - PUT
+                - DELETE
+                - OPTIONS
+            allowed-headers:
+                - "*"
+            exposed-headers:
+                - "Content-Type"
+                - "Authorization"
+            allow-credentials: true
+
+    email:
+        provider: "sendgrid"
+        from:
+            email: "guardiao.chaves@gmail.com"
+            name: "Guardião de Chaves"
+
+sendgrid:
+    enabled: true
+    api-key: ${SENDGRID_API_KEY}
+
+master:
+    username: ${MASTER_USERNAME:admin}
+    password: ${MASTER_PASSWORD:123456}
+
+datasources:
+    default:
+        url: ${DEFAULT_DB_URL:jdbc:postgresql://localhost:5434/key_keeper}
+        username: ${DEFAULT_DB_USERNAME:postgres}
+        password: ${DEFAULT_DB_PASSWORD:postgres}
+        driverClassName: org.postgresql.Driver
+        dialect: POSTGRES
+        schema-generate: UPDATE
+        generate-ddl: true
+
+jpa:
+    default:
+        packages-to-scan:
+            - 'github.sagubr'
+        properties:
+            hibernate:
+                hbm2ddl:
+                    auto: update
+                show_sql: false
+
+#liquibase: ---> destaivado temporiariamente por causa da função schema-generate e generate-ddl. Depois precisa apagar e voltar a utilizar liquibase
+#    enabled: true
+#    datasources:
+#        default:
+#            change-log: 'classpath:db/liquibase-changelog.xml'

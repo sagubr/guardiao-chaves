@@ -1,0 +1,61 @@
+@mixin font(
+	$fontSize: medium,
+	$fontWeight: medium,
+	$lineHeight: normal,
+	$letterSpacing: normal
+) {
+	font-size: $fontSize;
+	font-weight: $fontWeight;
+	font-family: 'Poppins', sans-serif;
+	line-height: $lineHeight;
+	letter-spacing: $letterSpacing;
+}
+
+.h1 {
+	@include font(32px, bold, 36px, -1);
+}
+
+.h2 {
+	@include font(20px, bold, 22px, -0.63);
+}
+
+.h3 {
+	@include font(16px, bold, 24px, -0.8);
+}
+
+.h4 {
+	@include font(12px, bold, 15px, -0.25);
+}
+
+.body-1 {
+	@include font(12px, medium, 15px, -0.25);
+}
+
+.body-2 {
+	@include font(11px, medium, 18px, -0.23);
+}
+
+.body-3 {
+	@include font(14px, normal, 20px, 0);
+}
+
+.paragraph {
+	@include font(14px, normal, 21px, 0.1px);
+	color: var(--text-primary, #333);
+}
+
+.paragraph-small {
+	@include font(12px, normal, 18px, 0);
+	color: var(--text-secondary, #666);
+}
+
+.tooltip {
+	@include font(10px, normal, 14px, 0);
+	color: var(--tooltip-text, #fff);
+}
+
+.label {
+	@include font(12px, bold, 16px, 0.5px);
+	text-transform: uppercase;
+}
+

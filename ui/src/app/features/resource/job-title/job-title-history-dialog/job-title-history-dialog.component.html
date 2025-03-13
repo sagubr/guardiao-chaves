@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Histórico de Alterações</h2>
+
+<mat-dialog-content>
+	<div *ngFor="let historyItem of histories">
+		<mat-card class="history-card">
+			<mat-card-header>
+				<mat-card-title>Informações anteriores</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<p><strong>Nome:</strong> {{ historyItem.entidade.name }}</p>
+				<p><strong>Descrição:</strong> {{ historyItem.entidade.description }}</p>
+				<p><strong>Alterado em:</strong> {{ historyItem.timestamp | date:'dd MMMM yyyy HH:mm' }} </p>
+			</mat-card-content>
+		</mat-card>
+	</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+	<button mat-button mat-dialog-close>Fechar</button>
+</mat-dialog-actions>

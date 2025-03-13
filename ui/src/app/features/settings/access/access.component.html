@@ -1,0 +1,26 @@
+<mat-accordion class="example-headers-align" multi>
+	<mat-expansion-panel>
+		<mat-expansion-panel-header>
+			<mat-panel-title class="h2">Atribuições da Aplicação</mat-panel-title>
+			<mat-panel-description>
+				<span></span>
+				<mat-icon>assignment</mat-icon>
+			</mat-panel-description>
+		</mat-expansion-panel-header>
+
+		<app-assignment-datatable></app-assignment-datatable>
+	</mat-expansion-panel>
+
+	<mat-expansion-panel expanded>
+		<mat-expansion-panel-header>
+			<mat-panel-title class="h2">Usuários da Aplicação</mat-panel-title>
+			<mat-panel-description class="icon">
+				<span></span>
+				<mat-icon>account_circle</mat-icon>
+			</mat-panel-description>
+		</mat-expansion-panel-header>
+
+		<app-user-datatable></app-user-datatable>
+
+	</mat-expansion-panel>
+</mat-accordion>

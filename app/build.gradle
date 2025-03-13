@@ -1,0 +1,123 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("io.micronaut.application") version "4.4.2"
+    id("org.asciidoctor.jvm.convert") version "3.3.2"
+    id("io.micronaut.test-resources") version "4.4.2"
+    id("io.micronaut.aot") version "4.4.2"
+}
+
+version = "0.1"
+group = "github.sagubr"
+
+apply from: "gradle/asciidoc.gradle"
+repositories {
+    mavenCentral()
+}
+
+asciidoctor {
+    sourceDir = file('src/docs/asciidoc') // Caminho para a pasta onde os arquivos .adoc estão localizados
+    outputDir = file("$buildDir/docs") // Pasta de saída para os arquivos gerados
+}
+
+dependencies {
+
+    /* Postgres */
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    runtimeOnly("org.postgresql:postgresql")
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
+
+    /* Liquibase */
+    implementation("io.micronaut.liquibase:micronaut-liquibase")
+
+//    /*mongoDB*/
+//    annotationProcessor("io.micronaut.data:micronaut-data-document-processor")
+//    implementation("io.micronaut.data:micronaut-data-mongodb")
+//    runtimeOnly("org.mongodb:mongodb-driver-sync")
+
+    /* Openapi */
+    compileOnly("io.micronaut.openapi:micronaut-openapi-annotations")
+    annotationProcessor("io.micronaut.openapi:micronaut-openapi")
+
+    /*Lombok */
+    compileOnly("org.projectlombok:lombok:1.18.34")
+    annotationProcessor("org.projectlombok:lombok:1.18.34")
+    testCompileOnly("org.projectlombok:lombok:1.18.34")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.34")
+
+    /*Security */
+    implementation("io.micronaut.security:micronaut-security-jwt")
+    implementation("org.springframework.security:spring-security-core:6.3.1")
+    annotationProcessor("io.micronaut.security:micronaut-security-annotations")
+    aotPlugins("io.micronaut.security:micronaut-security-aot")
+
+    /* MapStruct */
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+    /* Http */
+    implementation("io.micronaut.serde:micronaut-serde-jackson")
+    compileOnly("io.micronaut:micronaut-http-client")
+    testImplementation("io.micronaut:micronaut-http-client")
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+
+    /* email */
+    implementation("org.thymeleaf:thymeleaf:3.0.15")
+    implementation("io.micronaut.email:micronaut-email-sendgrid")
+
+    /* cache */
+    implementation("io.micronaut.cache:micronaut-cache-core")
+    implementation("io.micronaut.cache:micronaut-cache-caffeine")
+
+    /* reactor*/
+    implementation("io.micronaut.reactor:micronaut-reactor")
+
+    /* logging */
+    implementation("org.slf4j:jul-to-slf4j:1.7.30")
+    implementation 'ch.qos.logback:logback-classic:0.9.26'
+    runtimeOnly("ch.qos.logback:logback-classic")
+
+    /* yml micronaut */
+    runtimeOnly("org.yaml:snakeyaml")
+    aotPlugins platform("io.micronaut.platform:micronaut-platform:4.5.0")
+    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
+}
+
+application {
+    mainClass = "github.sagubr.Application"
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
+}
+
+
+graalvmNative.toolchainDetection = false
+
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("github.sagubr.*")
+    }
+    testResources {
+        additionalModules.add("jdbc-postgresql")
+    }
+    aot {
+        // Please review carefully the optimizations enabled below
+        // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
+        optimizeServiceLoading = false
+        convertYamlToJava = false
+        precomputeOperations = true
+        cacheEnvironment = true
+        optimizeClassLoading = true
+        deduceEnvironment = true
+        optimizeNetty = true
+        replaceLogbackXml = true
+        configurationProperties.put("micronaut.security.jwks.enabled", "false")
+    }
+}
+
+
+

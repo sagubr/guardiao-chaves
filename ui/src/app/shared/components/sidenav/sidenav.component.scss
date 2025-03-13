@@ -1,0 +1,87 @@
+@use '@angular/material' as mat;
+@use 'fonts';
+@use 'icons';
+@use 'theme-colors' as custom-theme;
+
+.spacer {
+	flex: 1 1 auto;
+}
+
+.toolbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1000;
+
+	@include mat.toolbar-overrides((
+		container-background-color: map-get(custom-theme.$primary-palette, 60),
+	));
+}
+
+.collapse {
+	@include mat.expansion-overrides((
+		container-background-color: none,
+		container-shape: none,
+		legacy-header-indicator-display: none
+	));
+}
+
+.sidenav {
+	height: 100vh;
+	padding-top: 64px;
+
+	@include mat.sidenav-overrides((
+		container-shape: none,
+		container-background-color: map-get(custom-theme.$primary-palette, 60),
+		container-width: 250px
+	));
+
+	&.narrow {
+		text-align: center;
+		padding-left: 10px;
+
+		@include mat.sidenav-overrides((
+			container-width: 80px
+		));
+	}
+}
+
+.sidenav-container {
+	display: flex;
+	flex-direction: row;
+	height: 100vh;
+	padding-top: 64px;
+}
+
+.mat-drawer-content {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	padding: 20px;
+	overflow-y: auto;
+}
+
+.content {
+	flex-grow: 1;
+	padding-bottom: 60px;
+}
+
+.notifications-container {
+	position: absolute;
+	top: 50px;
+	right: 20px;
+	width: 300px;
+	max-height: 400px;
+	overflow-y: auto;
+	background-color: white;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+	border-radius: 8px;
+	padding: 16px;
+	margin-bottom: 10px;
+}
+
+.card-notifications {
+	margin-bottom: 10px;
+}

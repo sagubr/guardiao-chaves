@@ -1,0 +1,80 @@
+<div class="dialog-header">
+	<h2 class="h2" mat-dialog-title>Informações da Atribuição</h2>
+	<button mat-icon-button mat-dialog-close>
+		<mat-icon>close</mat-icon>
+	</button>
+</div>
+
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+	<mat-dialog-content>
+
+		<div class="row">
+			<div class="col">
+				<mat-form-field appearance="outline" class="full-width">
+					<mat-label>Atribução</mat-label>
+					<input matInput maxlength="256" formControlName="name">
+					@if (formGroup.get('name')?.invalid) {
+						<mat-error>Você deve inserir um valor</mat-error>
+					}
+				</mat-form-field>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<span class="h2">Funções da Aplicação</span>
+				<div
+					cdkDropList
+					#todoList="cdkDropList"
+					[cdkDropListData]="notGranted"
+					[cdkDropListConnectedTo]="[doneList]"
+					class="list"
+					(cdkDropListDropped)="drop($event)">
+					@for (item of notGranted; track item) {
+						<div class="box" cdkDrag>
+							{{ item.description }}
+							<mat-icon>drag_indicator</mat-icon>
+						</div>
+					}
+				</div>
+			</div>
+
+			<div class="col">
+				<span class="h2">Funções Atribuídas</span>
+
+				<div
+					cdkDropList
+					#doneList="cdkDropList"
+					[cdkDropListData]="granted"
+					[cdkDropListConnectedTo]="[todoList]"
+					class="list"
+					(cdkDropListDropped)="drop($event)">
+					@for (item of granted; track item) {
+						<div class="box" cdkDrag>
+							<div class="slide-toggle-wrapper">
+								{{ item.description }}
+								@if (item?.warning) {
+									<mat-icon
+										[matTooltip]="item.warning"
+										matTooltipPosition="right"
+										style="color: #f44336;"
+										>info
+									</mat-icon>
+								}
+							</div>
+							<mat-icon>drag_indicator</mat-icon>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</mat-dialog-content>
+	<mat-dialog-actions align="end">
+		<button mat-raised-button class="button-secondary" type="button" [mat-dialog-close]="true">
+			Cancelar
+		</button>
+		<button mat-raised-button class="button-primary" type="submit" [disabled]="formGroup.invalid">
+			Salvar
+		</button>
+	</mat-dialog-actions>
+</form>

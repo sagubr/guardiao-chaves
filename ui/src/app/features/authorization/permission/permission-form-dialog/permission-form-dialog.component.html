@@ -1,0 +1,79 @@
+<div class="dialog-header">
+	<h2 class="h2" mat-dialog-title>Informações da Permissão</h2>
+	<button mat-icon-button mat-dialog-close>
+		<mat-icon>close</mat-icon>
+	</button>
+</div>
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+	<mat-dialog-content>
+		<div class="row">
+			<div class="col">
+				<app-select-wrapped
+					formControlName="locations"
+					[options]="locations"
+					[displayFn]="locationDisplay"
+					[multiple]="true"
+					placeholder="Salas"
+				></app-select-wrapped>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<app-select-wrapped
+					formControlName="requesters"
+					[options]="requesters"
+					[displayFn]="requesterDisplay"
+					[multiple]="true"
+					placeholder="Solicitantes"
+					required
+				></app-select-wrapped>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<mat-form-field appearance="outline" class="full-width">
+					<mat-label>Descrição da permissão</mat-label>
+					<input matInput maxlength="256" formControlName="description">
+					<mat-error *ngIf="formGroup.get('description')?.invalid">Você deve inserir um valor</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<mat-form-field appearance="outline" class="full-width">
+					<mat-label>Enter a date range</mat-label>
+					<mat-date-range-input [rangePicker]="picker">
+						<input matStartDate formControlName="startDateTime" placeholder="Início da Validade">
+						<input matEndDate formControlName="endDateTime" placeholder="Fim da Validade">
+					</mat-date-range-input>
+					<mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+					<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+					<mat-date-range-picker #picker></mat-date-range-picker>
+
+					@if (formGroup.get('startDateTime')?.invalid) {
+						<mat-error>Início inválido</mat-error>
+					}
+					@if (formGroup.get('endDateTime')?.invalid) {
+						<mat-error>Fim inválido</mat-error>
+					}
+				</mat-form-field>
+			</div>
+		</div>
+	</mat-dialog-content>
+	<mat-dialog-actions align="end">
+		<button mat-raised-button
+				class="button-secondary"
+				type="button" [mat-dialog-close]="true">
+			Cancelar
+		</button>
+		<button mat-raised-button
+				class="button-primary"
+				type="submit" [disabled]="formGroup.invalid">
+			Salvar
+		</button>
+	</mat-dialog-actions>
+</form>
+

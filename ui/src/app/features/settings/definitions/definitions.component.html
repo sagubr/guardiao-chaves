@@ -1,0 +1,102 @@
+<mat-card appearance="outlined">
+	<mat-card-header class="content h2">
+		<mat-card-title>Configurações</mat-card-title>
+	</mat-card-header>
+
+	<mat-card-content>
+		<form [formGroup]="formGroup" (ngSubmit)="alertFormValues(formGroup)">
+			<div class="row">
+				<div class="slide-toggle-wrapper">
+					<mat-slide-toggle formControlName="autoEmail">
+						Disparo automático de e-mail de cobrança
+					</mat-slide-toggle>
+					<mat-icon class="icon-medium"
+							  matTooltip="Após o vencimento de um empréstimo, a aplicação enviará um e-mail automático de cobrança para o solicitante."
+							  matTooltipPosition="right">info
+					</mat-icon>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="slide-toggle-wrapper">
+					<mat-slide-toggle formControlName="blockPending">
+						Bloquear solicitantes com empréstimo
+					</mat-slide-toggle>
+					<mat-icon class="icon-medium"
+							  matTooltip="Não é possível solicitar um novo empréstimo se o solicitante não houver concluído o anterior."
+							  matTooltipPosition="right">info
+					</mat-icon>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="slide-toggle-wrapper">
+					<mat-slide-toggle formControlName="enableLogs">
+						Ativar registro de logs
+					</mat-slide-toggle>
+					<mat-icon class="icon-medium"
+							  matTooltip="Registra e armazena as atividades do sistema por um período determinado."
+							  matTooltipPosition="right">info
+					</mat-icon>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					<div class="slide-toggle-wrapper">
+						<mat-slide-toggle
+							(change)="fieldEnabled(formGroup.get('tolerancePeriod'))"
+						>
+							Habilitar Período de Tolerância
+						</mat-slide-toggle>
+						<mat-icon class="icon-medium"
+								  matTooltip="Permite definir um período de tolerância em dias antes de bloquear novos empréstimos."
+								  matTooltipPosition="right">info
+						</mat-icon>
+					</div>
+				</div>
+				<div class="col">
+					<mat-form-field appearance="outline" class="full-width">
+						<mat-label>Período de Tolerância (dias)</mat-label>
+						<input matInput type="number" formControlName="tolerancePeriod"
+							   min="0">
+					</mat-form-field>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					<div class="slide-toggle-wrapper">
+						<mat-slide-toggle
+							(change)="fieldEnabled(formGroup.get('maxLoanPeriod'))">
+							Habilitar Período Máximo de Empréstimo
+						</mat-slide-toggle>
+						<mat-icon class="icon-medium"
+								  matTooltip="Define um limite máximo de dias para a duração de cada empréstimo."
+								  matTooltipPosition="right">info
+						</mat-icon>
+					</div>
+				</div>
+				<div class="col">
+					<mat-form-field appearance="outline" class="full-width">
+						<mat-label>Período Máximo de Empréstimo (dias)</mat-label>
+						<input matInput type="number" formControlName="maxLoanPeriod"
+							   [disabled]="!formGroup.get('maxLoanPeriod')?.value"
+							   min="1">
+					</mat-form-field>
+				</div>
+			</div>
+
+			<div class="actions">
+				<button mat-raised-button
+						class="button-primary"
+						type="submit">Salvar Configurações
+				</button>
+			</div>
+
+		</form>
+	</mat-card-content>
+	<mat-card-actions>
+		<a mat-button href="http://localhost:8080/swagger-ui/index.html#/" target="_blank">Consultar documentação API</a>
+	</mat-card-actions>
+</mat-card>
