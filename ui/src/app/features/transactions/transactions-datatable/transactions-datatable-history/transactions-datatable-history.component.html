@@ -35,7 +35,7 @@
 		<div class="mat-table-container">
 			<div class="table-wrapper">
 				<table-wrapper [dataSource]="dataSource" [columns]="columns"
-									 matSort #sort="matSort">
+							   matSort #sort="matSort">
 
 					<ng-container matColumnDef="info">
 						<th mat-header-cell *matHeaderCellDef class="mat-header-cell">Situação</th>
@@ -74,7 +74,7 @@
 									<mat-icon>help</mat-icon>
 									<span>Mais informações</span>
 								</button>
-								<button mat-menu-item>
+								<button mat-menu-item disabled>
 									<mat-icon>undo</mat-icon>
 									<span>Desfazer</span>
 								</button>

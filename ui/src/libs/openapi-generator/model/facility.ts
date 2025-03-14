@@ -18,5 +18,6 @@ export interface Facility {
     updatedAt?: string;
     name: string;
     description?: string;
+    history?: Array<object>;
 }
 

@@ -26,5 +26,6 @@ export interface Permission {
     description?: string;
     startDateTime: string;
     endDateTime: string;
+    history?: Array<object>;
 }
 

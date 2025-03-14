@@ -29,5 +29,6 @@ export interface Location {
     openingTime?: string;
     closingTime?: string;
     responsibles?: Array<Requester>;
+    history?: Array<object>;
 }
 

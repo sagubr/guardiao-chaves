@@ -20,51 +20,41 @@
 			<div class="col">
 				<mat-form-field appearance="outline" class="full-width">
 					<mat-label>Descrição</mat-label>
-					<input matInput maxlength="256" formControlName="description">
+					<textarea matInput maxlength="256" formControlName="description"></textarea>
 					<mat-error *ngIf="form.get('description')?.invalid">Você deve inserir um valor</mat-error>
 				</mat-form-field>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col">
-				<mat-form-field appearance="outline" class="full-width">
-					<mat-label>Tipo de Ambiente</mat-label>
-					<mat-select formControlName="locationType" [compareWith]="compareById">
-						@for (element of locationTypes; track $index) {
-							<mat-option [value]="element">{{ element.name }}</mat-option>
-						}
-					</mat-select>
-					<mat-error *ngIf="form.get('locationType')?.invalid">Você deve inserir um valor</mat-error>
-				</mat-form-field>
+				<app-select-wrapped
+					formControlName="locationType"
+					[options]="locationTypes"
+					[displayFn]="locationTypeDisplay"
+					placeholder="Tipo de Ambiente"
+				></app-select-wrapped>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col">
-				<mat-form-field appearance="outline" class="full-width">
-					<mat-label>Instalação</mat-label>
-					<mat-select formControlName="facility" [compareWith]="compareById">
-						@for (element of facilities; track $index) {
-							<mat-option [value]="element">{{ element.name }}</mat-option>
-						}
-					</mat-select>
-					<mat-error *ngIf="form.get('facility')?.invalid">Você deve inserir um valor</mat-error>
-				</mat-form-field>
+				<app-select-wrapped
+					formControlName="facility"
+					[options]="facilities"
+					[displayFn]="facilityDisplay"
+					placeholder="Instalação"
+				></app-select-wrapped>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col">
-				<mat-form-field appearance="outline" class="full-width">
-					<mat-label>Responsáveis</mat-label>
-					<mat-select
-						formControlName="responsibles"
-						[compareWith]="compareById"
-						multiple>
-						@for (element of responsibles; track $index) {
-							<mat-option [value]="element">{{ element.name }}</mat-option>
-						}
-					</mat-select>
-					<mat-error *ngIf="form.get('responsibles')?.invalid">Você deve inserir um valor</mat-error>
-				</mat-form-field>
+
+				<app-select-wrapped
+					formControlName="responsibles"
+					[options]="responsibles"
+					[displayFn]="responsiblesDisplay"
+					placeholder="Responsáveis"
+					[multiple]="true"
+				></app-select-wrapped>
 			</div>
 		</div>
 		<div class="row">
@@ -76,7 +66,7 @@
 						Sala pública
 					</mat-slide-toggle>
 					<mat-icon class="icon-medium"
-							  matTooltip="Sala pode ser acessada por qualquer solicitante"
+							  matTooltip="Sala pode ser acessada por qualquer solicitante, mesmo sem permissão cadastrada."
 							  matTooltipPosition="right">
 						info
 					</mat-icon>
@@ -144,7 +134,7 @@
 				type="button" [mat-dialog-close]="true">
 			Cancelar
 		</button>
-		<button mat-raised-button
+		<button mat-flat-button
 				class="button-primary"
 				type="submit" [disabled]="form.invalid">
 			Salvar

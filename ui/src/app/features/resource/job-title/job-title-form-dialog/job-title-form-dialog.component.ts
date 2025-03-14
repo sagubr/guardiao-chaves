@@ -53,14 +53,10 @@ export class JobTitleFormDialogComponent implements OnInit {
 		} else {
 			this.create();
 		}
-
-		if (this.data) {
-
-		}
 	}
 
 	private create(): void {
-		this.jobTitleService.addJobTitle(this.form.value).subscribe({
+		this.jobTitleService.createJobTitle(this.form.value).subscribe({
 			next: () => {
 				this.form.reset();
 				this.dialogRef.close(true);

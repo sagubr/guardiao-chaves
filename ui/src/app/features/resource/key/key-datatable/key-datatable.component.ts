@@ -17,6 +17,10 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { CommonModule } from "@angular/common";
+import { JobTitle } from "@openapi/model/jobTitle";
+import {
+	JobTitleFormDialogComponent
+} from "@app/features/resource/job-title/job-title-form-dialog/job-title-form-dialog.component";
 
 @Component({
 	selector: 'app-key-datatable',
@@ -109,8 +113,9 @@ export class KeyDatatableComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	openEditDialog(data: Location) {
 		this.dialog.open(KeyFormDialogComponent, {
-			data
-		});
+			data,
+			width: '540px'
+		}).afterClosed().subscribe(() => this.onReload());
 	}
 
 	private findAll(location: Location): void {

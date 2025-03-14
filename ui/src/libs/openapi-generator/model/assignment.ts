@@ -19,5 +19,6 @@ export interface Assignment {
     updatedAt?: string;
     name: string;
     permissions?: Array<Permissions>;
+    history?: Array<object>;
 }
 

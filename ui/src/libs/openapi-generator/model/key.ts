@@ -22,6 +22,7 @@ export interface Key {
     description: string;
     location: Location;
     keyType: KeyType;
+    history?: Array<object>;
 }
 export namespace Key {
 }

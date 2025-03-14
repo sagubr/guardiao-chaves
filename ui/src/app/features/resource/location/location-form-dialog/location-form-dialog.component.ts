@@ -23,6 +23,7 @@ import { provideNativeDateAdapter } from "@angular/material/core";
 import { Requester } from "@openapi/model/requester";
 import { RequesterService } from "@openapi/api/requester.service";
 import { DialogWrappedInfo, DialogWrappedService } from "@app/shared/components/dialog-wrapped/dialog-wrapped.service";
+import { SelectWrappedComponent } from "@app/shared/components/select-wrapped/select-wrapped.component";
 
 @Component({
 	selector: 'app-location-form-dialog',
@@ -39,7 +40,8 @@ import { DialogWrappedInfo, DialogWrappedService } from "@app/shared/components/
 		MatExpansionModule,
 		MatSlideToggleModule,
 		MatTooltipModule,
-		MatTimepickerModule
+		MatTimepickerModule,
+		SelectWrappedComponent
 	],
 	providers: [provideNativeDateAdapter()],
 	templateUrl: './location-form-dialog.component.html',
@@ -53,6 +55,11 @@ export class LocationFormDialogComponent implements OnInit {
 	locationTypes: LocationType[] = [];
 	facilities: Facility[] = [];
 	responsibles: Requester[] = [];
+
+	locationTypeDisplay = (element: LocationType) => `${ element.name }`;
+	facilityDisplay = (element: Facility) => `${ element.name }`;
+	responsiblesDisplay = (element: Requester) => `${ element.name }`;
+
 
 	constructor(
 		public dialogRef: MatDialogRef<LocationFormDialogComponent>,
@@ -76,29 +83,63 @@ export class LocationFormDialogComponent implements OnInit {
 
 	onSubmit(): void {
 		this.validateForm()
-		console.log(this.form.value)
-		if (this.data) {
-			this.locationService.createLocation(this.form.value).subscribe({
-				next: () => {
-					this.form.reset();
-					this.dialogRef.close(true);
-					this.dialogWrapped.openFeedback(
-						{
-							title: 'Salvo com sucesso',
-							message: ``,
-							icon: "success"
-						} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
-				},
-				error: () => {
-					this.dialogWrapped.openFeedback(
-						{
-							title: 'Não foi possível concluir o registro',
-							message: ``,
-							icon: "warning"
-						} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
-				}
-			});
+		if (this.data && this.data.id) {
+			this.edit();
+		} else {
+			this.create();
 		}
+	}
+
+	private create(): void {
+		this.locationService.createLocation(this.form.value).subscribe({
+			next: () => {
+				this.form.reset();
+				this.dialogRef.close(true);
+				this.dialogWrapped.openFeedback(
+					{
+						title: 'Salvo com sucesso',
+						message: ``,
+						icon: "success"
+					} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
+			},
+			error: () => {
+				this.dialogWrapped.openFeedback(
+					{
+						title: 'Não foi possível concluir o registro',
+						message: ``,
+						icon: "warning"
+					} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
+			}
+		});
+	}
+
+	private edit(): void {
+
+		const request = {
+			...this.form.value,
+			id: this.data.id
+		}
+
+		this.locationService.updateLocation(request).subscribe({
+			next: () => {
+				this.form.reset();
+				this.dialogRef.close(true);
+				this.dialogWrapped.openFeedback(
+					{
+						title: 'Salvo com sucesso',
+						message: ``,
+						icon: "success"
+					} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
+			},
+			error: () => {
+				this.dialogWrapped.openFeedback(
+					{
+						title: 'Não foi possível concluir o registro',
+						message: ``,
+						icon: "warning"
+					} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
+			}
+		});
 	}
 
 	private findAllFacilities(): void {

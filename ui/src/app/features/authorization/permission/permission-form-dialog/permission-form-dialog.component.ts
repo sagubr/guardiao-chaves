@@ -21,6 +21,7 @@ import { MatTimepickerModule } from "@angular/material/timepicker";
 import { DialogWrappedInfo, DialogWrappedService } from "@app/shared/components/dialog-wrapped/dialog-wrapped.service";
 import { SelectWrappedComponent } from "@app/shared/components/select-wrapped/select-wrapped.component";
 import { Key } from "@openapi/model/key";
+import { Permission } from "@openapi/model/permission";
 
 @Component({
 	selector: 'app-permission-form-dialog',
@@ -62,7 +63,7 @@ export class PermissionFormDialogComponent implements OnInit {
 		private readonly requesterService: RequesterService,
 		private readonly locationService: LocationService,
 		private readonly formBuilder: FormBuilder,
-		@Inject(MAT_DIALOG_DATA) public data: Location,
+		@Inject(MAT_DIALOG_DATA) public data: Permission,
 	) {
 		this.buildFormGroup();
 		this.findAllLocations();

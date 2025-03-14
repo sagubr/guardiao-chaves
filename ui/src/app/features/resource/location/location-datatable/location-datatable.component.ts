@@ -72,13 +72,13 @@ export class LocationDatatableComponent implements OnInit, AfterViewInit, OnDest
 		},
 		{
 			definition: 'restricted',
-			header: 'Restrito',
+			header: 'Restrita',
 			type: ColumnType.BOOLEAN,
 			cell: (element: Location) => element.restricted
 		},
 		{
 			definition: 'publicAccess',
-			header: 'Público',
+			header: 'Pública',
 			type: ColumnType.BOOLEAN,
 			cell: (element: Location) => element.publicAccess
 		},

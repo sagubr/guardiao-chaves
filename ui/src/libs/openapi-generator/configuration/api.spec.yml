@@ -7,32 +7,32 @@ servers:
 security:
     - Authorization: []
 tags:
+    - name: LocationType
+      description: Classe referência para Tipos de Ambiente
     - name: JobTitle
       description: Operações relacionadas a entidade cargo
-    - name: Email
-      description: Operações relacionadas a envio de e-mail
     - name: Facility
       description: Operações relacionadas a entidade lugar
+    - name: Key
+      description: Operações relacionadas a entidade Chaves
+    - name: Location
+      description: Classe referência para Localização
+    - name: Requester
+      description: Classe referência para Solicitantes
+    - name: Reservation
+      description: Classe referência para Reservas
+    - name: Email
+      description: Operações relacionadas a envio de e-mail
+    - name: Permission
+      description: Operações relacionadas a entidade Permissão
     - name: Users
       description: Classe referência para Usuário
+    - name: Notifications
+      description: Operações relacionadas a entidade Notificação
     - name: Logging
       description: Operações relacionadas a entidade Permissão
     - name: Assignment
       description: Classe referência para Atribuição
-    - name: LocationType
-      description: Classe referência para Tipos de Ambiente
-    - name: Requester
-      description: Classe referência para Solicitantes
-    - name: Permission
-      description: Operações relacionadas a entidade Permissão
-    - name: Location
-      description: Classe referência para Localização
-    - name: Key
-      description: Operações relacionadas a entidade Chaves
-    - name: Reservation
-      description: Classe referência para Reservas
-    - name: Notifications
-      description: Operações relacionadas a entidade Notificação
 paths:
     /api/assignment:
         get:
@@ -171,7 +171,42 @@ paths:
             tags:
                 - Facility
             summary: Criar nova instalação
-            operationId: addFacility
+            operationId: createFacility
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Facility"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Facility"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/facility/update:
+        patch:
+            tags:
+                - Facility
+            summary: Atualizar um registro na classe instalação
+            operationId: updateFacility
             requestBody:
                 content:
                     application/json:
@@ -237,7 +272,7 @@ paths:
             tags:
                 - JobTitle
             summary: Criar novo cargo
-            operationId: addJobTitle
+            operationId: createJobTitle
             requestBody:
                 content:
                     application/json:
@@ -375,7 +410,7 @@ paths:
             tags:
                 - Key
             summary: Criar novo cargo
-            operationId: addKey
+            operationId: createKey
             requestBody:
                 content:
                     application/json:
@@ -406,7 +441,7 @@ paths:
                         application/json:
                             schema: {}
     /api/key/update:
-        post:
+        patch:
             tags:
                 - Key
             summary: Atualizar cargo existente
@@ -508,6 +543,41 @@ paths:
                 - LocationType
             summary: Criar novo registro na classe tipos de ambiente
             operationId: createLocationType
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/LocationType"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/LocationType"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/location-type/update:
+        patch:
+            tags:
+                - LocationType
+            summary: Atualizar um registro na classe tipo de ambiente
+            operationId: updateLocationType
             requestBody:
                 content:
                     application/json:
@@ -645,6 +715,41 @@ paths:
                 - Location
             summary: Criar novo registro na classe localização
             operationId: createLocation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Location"
+                required: true
+            responses:
+                "200":
+                    description: Operação bem sucedida
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Location"
+                "401":
+                    description: Falha de autenticação
+                "403":
+                    description: Acesso não autorizado
+                "404":
+                    description: Recurso não encontrado
+                "422":
+                    description: Erro de validação
+                    content:
+                        application/json:
+                            schema: {}
+                "500":
+                    description: Erro
+                    content:
+                        application/json:
+                            schema: {}
+    /api/location/update:
+        patch:
+            tags:
+                - Location
+            summary: Atualizar um registro na classe localização
+            operationId: updateLocation
             requestBody:
                 content:
                     application/json:
@@ -1729,6 +1834,10 @@ components:
                           type: array
                           items:
                               $ref: "#/components/schemas/Permissions"
+                      history:
+                          type: array
+                          items:
+                              type: object
         AssignmentCommand:
             required:
                 - assignmentId
@@ -1787,6 +1896,10 @@ components:
                           type: string
                       description:
                           type: string
+                      history:
+                          type: array
+                          items:
+                              type: object
         JobTitle:
             required:
                 - name
@@ -1799,8 +1912,9 @@ components:
                       description:
                           type: string
                       history:
-                          type: object
-                          additionalProperties: true
+                          type: array
+                          items:
+                              type: object
         Key:
             required:
                 - code
@@ -1820,6 +1934,10 @@ components:
                           $ref: "#/components/schemas/Location"
                       keyType:
                           $ref: "#/components/schemas/KeyType"
+                      history:
+                          type: array
+                          items:
+                              type: object
         KeyType:
             type: string
             enum:
@@ -1859,6 +1977,10 @@ components:
                           type: array
                           items:
                               $ref: "#/components/schemas/Requester"
+                      history:
+                          type: array
+                          items:
+                              type: object
         LocationType:
             required:
                 - name
@@ -1870,6 +1992,10 @@ components:
                           type: string
                       description:
                           type: string
+                      history:
+                          type: array
+                          items:
+                              type: object
         LoggingEvent:
             required:
                 - level
@@ -1931,6 +2057,10 @@ components:
                       endDateTime:
                           type: string
                           format: date-time
+                      history:
+                          type: array
+                          items:
+                              type: object
         PermissionLocationSummaryDto:
             required:
                 - endDateTime
@@ -1998,6 +2128,10 @@ components:
                           type: boolean
                       blocked:
                           type: boolean
+                      history:
+                          type: array
+                          items:
+                              type: object
         Reservation:
             required:
                 - endDateTime
@@ -2043,6 +2177,10 @@ components:
                           $ref: "#/components/schemas/Status"
                       notification:
                           type: boolean
+                      history:
+                          type: array
+                          items:
+                              type: object
         ReservationChangeStatusCommand:
             required:
                 - reservationId

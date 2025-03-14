@@ -13,6 +13,7 @@ import { ClipboardModule } from "@angular/cdk/clipboard";
 import { MatChipsModule } from "@angular/material/chips";
 import { LocationTypeService } from "@openapi/api/locationType.service";
 import { DialogWrappedInfo, DialogWrappedService } from "@app/shared/components/dialog-wrapped/dialog-wrapped.service";
+import { LocationType } from "@openapi/model/locationType";
 
 @Component({
   selector: 'app-location-type-form-dialog',
@@ -41,7 +42,7 @@ export class LocationTypeFormDialog implements OnInit {
 		private readonly dialogRef: MatDialogRef<LocationTypeFormDialog>,
 		private readonly locationTypeService: LocationTypeService,
 		private readonly formBuilder: FormBuilder,
-		@Inject(MAT_DIALOG_DATA) public data: UserDto,
+		@Inject(MAT_DIALOG_DATA) public data: LocationType,
 	) {
 		this.buildFormGroup();
 	}
@@ -52,34 +53,65 @@ export class LocationTypeFormDialog implements OnInit {
 
 	onSubmit(): void {
 		this.validateForm()
-
-		if (this.data) {
-			this.locationTypeService.createLocationType(this.form.value).subscribe({
-				next: () => {
-					this.form.reset();
-					this.dialogRef.close(true);
-					this.dialogWrapped.openFeedback(
-						{
-							title: 'Salvo com sucesso',
-							message: ``,
-							icon: "success"
-						} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
-				},
-				error: (err: any) => {
-					console.error(err);
-					this.dialogWrapped.openFeedback(
-						{
-							title: 'Não foi possível concluir o registro',
-							message: ``,
-							icon: "warning"
-						} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
-				},
-			});
+		if (this.data && this.data.id) {
+			this.edit();
+		} else {
+			this.create();
 		}
 	}
 
-	onCancel(): void {
-		this.dialogRef.close();
+	private create(): void {
+		this.locationTypeService.createLocationType(this.form.value).subscribe({
+			next: () => {
+				this.form.reset();
+				this.dialogRef.close(true);
+				this.dialogWrapped.openFeedback(
+					{
+						title: 'Salvo com sucesso',
+						message: ``,
+						icon: "success"
+					} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
+			},
+			error: (err: any) => {
+				console.error(err);
+				this.dialogWrapped.openFeedback(
+					{
+						title: 'Não foi possível concluir o registro',
+						message: ``,
+						icon: "warning"
+					} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
+			},
+		});
+	}
+
+	private edit(): void {
+
+		const request = {
+			...this.form.value,
+			id: this.data.id
+		}
+
+		this.locationTypeService.updateLocationType(request).subscribe({
+			next: () => {
+				this.form.reset();
+				this.dialogRef.close(true);
+				this.dialogWrapped.openFeedback(
+					{
+						title: 'Salvo com sucesso',
+						message: ``,
+						icon: "success"
+					} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
+			},
+			error: (err: any) => {
+				console.error(err);
+				this.dialogWrapped.openFeedback(
+					{
+						title: 'Não foi possível concluir o registro',
+						message: ``,
+						icon: "warning"
+					} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
+			},
+		});
 	}
 
 	private validateForm(): void {

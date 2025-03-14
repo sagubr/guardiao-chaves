@@ -33,15 +33,11 @@ export class JobTitleHistoryDialogComponent implements OnInit {
 	histories: History[] = [];
 
 	constructor(@Inject(MAT_DIALOG_DATA) public data: JobTitle) {
-
 	}
 
 	ngOnInit(): void {
-
-		console.log(this.data)
 		if (this.data.history && Array.isArray(this.data.history)) {
-			this.histories = this.data.history;
-
+			this.histories = this.data.history as History[];
 		}
 	}
 

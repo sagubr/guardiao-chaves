@@ -34,6 +34,7 @@ export interface Reservation {
     endDateTime: string;
     status: Status;
     notification?: boolean;
+    history?: Array<object>;
 }
 export namespace Reservation {
 }

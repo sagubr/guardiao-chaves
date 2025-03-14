@@ -69,30 +69,65 @@ export class KeyFormDialogComponent implements OnInit {
 
 	onSubmit(): void {
 		this.validateForm()
-		this.formGroup.get('code')?.enable()
-		if (this.data) {
-			this.keyService.addKey(this.formGroup.value).subscribe({
-				next: () => {
-					this.formGroup.reset();
-					this.dialogRef.close(true);
-					this.dialogWrapped.openFeedback(
-						{
-							title: 'Salvo com sucesso',
-							message: ``,
-							icon: "success"
-						} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
-				},
-				error: (err: any) => {
-					console.error(err);
-					this.dialogWrapped.openFeedback(
-						{
-							title: 'Não foi possível concluir o registro',
-							message: ``,
-							icon: "warning"
-						} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
-				},
-			});
+		if (this.data && this.data.id) {
+			this.edit();
+		} else {
+			this.create();
 		}
+	}
+
+	private create(): void {
+		this.keyService.createKey(this.formGroup.value).subscribe({
+			next: () => {
+				this.formGroup.reset();
+				this.dialogRef.close(true);
+				this.dialogWrapped.openFeedback(
+					{
+						title: 'Salvo com sucesso',
+						message: ``,
+						icon: "success"
+					} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
+			},
+			error: (err: any) => {
+				console.error(err);
+				this.dialogWrapped.openFeedback(
+					{
+						title: 'Não foi possível concluir o registro',
+						message: ``,
+						icon: "warning"
+					} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
+			},
+		});
+	}
+
+	private edit(): void {
+
+		const request = {
+			...this.formGroup.value,
+			id: this.data.id
+		}
+
+		this.keyService.updateKey(request).subscribe({
+			next: () => {
+				this.formGroup.reset();
+				this.dialogRef.close(true);
+				this.dialogWrapped.openFeedback(
+					{
+						title: 'Salvo com sucesso',
+						message: ``,
+						icon: "success"
+					} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
+			},
+			error: (err: any) => {
+				console.error(err);
+				this.dialogWrapped.openFeedback(
+					{
+						title: 'Não foi possível concluir o registro',
+						message: ``,
+						icon: "warning"
+					} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
+			},
+		});
 	}
 
 	private validateForm(): void {

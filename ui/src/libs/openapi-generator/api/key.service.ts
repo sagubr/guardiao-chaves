@@ -99,12 +99,12 @@ export class KeyService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addKey(key: Key, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<Key>;
-    public addKey(key: Key, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Key>>;
-    public addKey(key: Key, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Key>>;
-    public addKey(key: Key, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public createKey(key: Key, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<Key>;
+    public createKey(key: Key, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Key>>;
+    public createKey(key: Key, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Key>>;
+    public createKey(key: Key, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (key === null || key === undefined) {
-            throw new Error('Required parameter key was null or undefined when calling addKey.');
+            throw new Error('Required parameter key was null or undefined when calling createKey.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -389,7 +389,7 @@ export class KeyService {
         }
 
         let localVarPath = `/api/key/update`;
-        return this.httpClient.request<Key>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Key>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: key,

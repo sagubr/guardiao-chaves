@@ -97,12 +97,12 @@ export class JobTitleService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addJobTitle(jobTitle: JobTitle, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<JobTitle>;
-    public addJobTitle(jobTitle: JobTitle, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<JobTitle>>;
-    public addJobTitle(jobTitle: JobTitle, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<JobTitle>>;
-    public addJobTitle(jobTitle: JobTitle, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public createJobTitle(jobTitle: JobTitle, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<JobTitle>;
+    public createJobTitle(jobTitle: JobTitle, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<JobTitle>>;
+    public createJobTitle(jobTitle: JobTitle, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<JobTitle>>;
+    public createJobTitle(jobTitle: JobTitle, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (jobTitle === null || jobTitle === undefined) {
-            throw new Error('Required parameter jobTitle was null or undefined when calling addJobTitle.');
+            throw new Error('Required parameter jobTitle was null or undefined when calling createJobTitle.');
         }
 
         let localVarHeaders = this.defaultHeaders;

@@ -18,6 +18,6 @@ export interface JobTitle {
     updatedAt?: string;
     name: string;
     description?: string;
-    history?: { [key: string]: any; };
+    history?: Array<object>;
 }
 

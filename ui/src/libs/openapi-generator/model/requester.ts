@@ -23,5 +23,6 @@ export interface Requester {
     jobTitle?: JobTitle | null;
     responsible: boolean;
     blocked: boolean;
+    history?: Array<object>;
 }
 
