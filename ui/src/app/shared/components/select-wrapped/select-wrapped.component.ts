@@ -74,6 +74,9 @@ export class SelectWrappedComponent<T> implements ControlValueAccessor, OnInit, 
 	searchTerm: string = '';
 	filteredOptions: T[] = [];
 	selectedOptions: T[] = [];
+	singleSelectedOption?: T | null;
+	modelValue: any = [];
+
 	allSelected = false;
 
 	selected = new FormControl<T | null>(null, [Validators.required]);
@@ -99,11 +102,7 @@ export class SelectWrappedComponent<T> implements ControlValueAccessor, OnInit, 
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes['options'] && !changes['options'].firstChange) {
-			if (this.selectedOptions.length > 0) {
-				this.selectedOptions = this.selectedOptions
-					.map((option) =>
-						this.options().find(o => this.compareById(o, option)) || option);
-			}
+			this.updateSelection();
 		}
 	}
 
@@ -116,9 +115,35 @@ export class SelectWrappedComponent<T> implements ControlValueAccessor, OnInit, 
 			: this.mySelect.options.forEach((item: MatOption) => item.deselect())
 	}
 
+	updateSelection(): void {
+		if (this.multiple()) {
+			this.selectedOptions = this.selectedOptions.map((option) =>
+				this.options().find(o => this.compareById(o, option)) || option
+			);
+		} else {
+			if (this.singleSelectedOption) {
+				this.singleSelectedOption = this.options().find(o => this.compareById(o, this.singleSelectedOption)) || null;
+			}
+		}
+		this.updateModelValue();
+	}
+
 	writeValue(value: T[] | null): void {
 		if (value) {
-			this.selectedOptions = value;
+			if (this.multiple()) {
+				this.selectedOptions = value;
+			} else {
+				this.singleSelectedOption = value as T
+			}
+			this.updateModelValue();
+		}
+	}
+
+	updateModelValue(): void {
+		if (this.multiple()) {
+			this.modelValue = this.selectedOptions;
+		} else {
+			this.modelValue = this.singleSelectedOption;
 		}
 	}
 
@@ -153,7 +178,7 @@ export class SelectWrappedComponent<T> implements ControlValueAccessor, OnInit, 
 		);
 	}
 
-	clearTerm(): void{
+	clearTerm(): void {
 		this.searchTerm = '';
 		this.filterOptions();
 	}

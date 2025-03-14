@@ -8,7 +8,7 @@
 		[disabled]="isLoading() || options().length === 0"
 		panelClass="custom-select-panel"
 		[multiple]="multiple()"
-		[(ngModel)]="selectedOptions"
+		[(ngModel)]="modelValue"
 		#mySelect
 	>
 		<div class="search-container">
@@ -27,7 +27,6 @@
 		</div>
 
 		@if (multiple()) {
-
 			<mat-option (click)="toggleAllSelection()">
 				Selecionar todos
 			</mat-option>
