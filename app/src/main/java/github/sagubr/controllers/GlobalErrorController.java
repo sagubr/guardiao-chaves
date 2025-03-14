@@ -1,4 +1,4 @@
-package github.sagubr.controller;
+package github.sagubr.controllers;
 
 import github.sagubr.exceptions.UserNotFoundException;
 import io.micronaut.data.exceptions.EmptyResultException;
@@ -61,6 +61,13 @@ public class GlobalErrorController {
     @Produces(MediaType.APPLICATION_JSON)
     public HttpResponse<ApiError> handleConstraintViolationException(ConstraintViolationException exception) {
         ApiError apiError = new ApiError("ConstraintViolationException", exception.getMessage());
+        return HttpResponse.badRequest(apiError);
+    }
+
+    @Error(global = true)
+    @Produces(MediaType.APPLICATION_JSON)
+    public HttpResponse<ApiError> handleNullPointerException(NullPointerException exception) {
+        ApiError apiError = new ApiError("NullPointerException", exception.getMessage());
         return HttpResponse.badRequest(apiError);
     }
 

@@ -29,26 +29,22 @@ public class PermissionService {
 
     @ReadOnly
     @Transactional
-    @Cacheable("permission-cache")
     public List<Permission> findAll() {
         return repository.findByActiveTrue();
     }
 
     @ReadOnly
     @Transactional
-    @Cacheable(value = "permission-cache", parameters = "id")
     public Permission findById(@NotBlank @NotNull UUID id) throws EmptyResultException {
         return repository.findById(id).orElseThrow(() -> new EmptyResultException());
     }
 
     @Transactional
-    @CacheInvalidate(value = "permission-cache", all = true)
     public Permission save(@NotNull Permission entity) {
          return repository.save(entity);
     }
 
     @Transactional
-    @CacheInvalidate(value = "permission-cache", all = true)
     public Permission deleteById(@NotBlank @NotNull UUID id) {
         return repository.findById(id)
                 .map(existing -> {
@@ -59,7 +55,6 @@ public class PermissionService {
     }
 
     @Transactional
-    @CacheInvalidate(value = "permission-cache", all = true)
     public void delete(@NotNull Permission entity) {
         try {
             repository.delete(entity);
@@ -69,7 +64,6 @@ public class PermissionService {
     }
 
     @Transactional
-    @CacheInvalidate(value = "permission-cache", all = true)
     public Permission update(@NotNull Permission entity) {
         return repository.findById(entity.getId())
                 .map(existing -> {
@@ -84,7 +78,6 @@ public class PermissionService {
     }
 
     @Transactional
-    @Cacheable(value = "permission-cache", parameters = "id")
     public List<PermissionLocationSummaryDto> findByRequestersIdAndEndDateTimeAfterAndActiveTrue(UUID id, ZonedDateTime now) {
         List<Permission> permissions = repository.findByRequestersIdAndEndDateTimeAfterAndActiveTrue(id, now);
         List<PermissionLocationSummaryDto> permissionLocationSummaryDtos =

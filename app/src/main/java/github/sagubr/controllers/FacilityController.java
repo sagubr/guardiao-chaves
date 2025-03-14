@@ -5,10 +5,7 @@ import github.sagubr.entities.Facility;
 import github.sagubr.entities.JobTitle;
 import github.sagubr.entities.Location;
 import github.sagubr.services.FacilityService;
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Post;
+import io.micronaut.http.annotation.*;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.rules.SecurityRule;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,8 +35,15 @@ public class FacilityController {
     @Operation(summary = "Criar nova instalação")
     @DefaultResponses
     @Post(value = "/save")
-    public Facility addFacility(@Body @Valid Facility facility) {
-        return service.save(facility);
+    public Facility createFacility(@Body @Valid Facility resource) {
+        return service.save(resource);
+    }
+
+    @Operation(summary = "Atualizar um registro na classe instalação")
+    @DefaultResponses
+    @Patch("/update")
+    public Facility updateFacility(@Body @Valid Facility resource) {
+        return service.update(resource);
     }
 
 }

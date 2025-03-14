@@ -32,7 +32,7 @@ public class JobTitleController {
     @Operation(summary = "Criar novo cargo")
     @DefaultResponses
     @Post(value = "/save")
-    public JobTitle addJobTitle(@Body @Valid JobTitle jobTitle) {
+    public JobTitle createJobTitle(@Body @Valid JobTitle jobTitle) {
         return service.save(jobTitle);
     }
 

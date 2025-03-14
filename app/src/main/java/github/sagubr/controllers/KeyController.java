@@ -43,13 +43,13 @@ public class KeyController {
     @Operation(summary = "Criar novo cargo")
     @DefaultResponses
     @Post(value = "/save")
-    public Key addKey(@Body @Valid Key key) {
+    public Key createKey(@Body @Valid Key key) {
         return service.save(key);
     }
 
     @Operation(summary = "Atualizar cargo existente")
     @DefaultResponses
-    @Post(value = "/update")
+    @Patch(value = "/update")
     public Key updateKey(@Body @Valid Key key) {
         return service.update(key);
     }

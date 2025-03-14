@@ -22,20 +22,17 @@ public class RequesterService {
 
     @ReadOnly
     @Transactional
-    @Cacheable("requesters")
     public List<Requester> findAll() throws EmptyResultException {
         return repository.findAll();
     }
 
     @ReadOnly
     @Transactional
-    @Cacheable(value = "requesters", parameters = "id")
     public Requester findById(UUID id) {
         return repository.findById(id).orElseThrow(EmptyResultException::new);
     }
 
     @Transactional
-    @CacheInvalidate(value = "requesters", all = true)
     public Requester save(Requester entity) {
         try {
             return repository.save(entity);
@@ -45,7 +42,6 @@ public class RequesterService {
     }
 
     @Transactional
-    @CacheInvalidate(value = "requesters", all = true)
     public Requester update(Requester entity) {
         return repository.findById(entity.getId())
                 .map(existing -> {
@@ -64,7 +60,6 @@ public class RequesterService {
     }
 
     @Transactional
-    @CacheInvalidate(value = "requesters", all = true)
     public void deleteById(UUID id) {
         try {
             repository.deleteById(id);
@@ -74,7 +69,6 @@ public class RequesterService {
     }
 
     @Transactional
-    @CacheInvalidate(value = "requesters", all = true)
     public void delete(Requester entity) {
         try {
             repository.delete(entity);
@@ -84,13 +78,11 @@ public class RequesterService {
     }
 
     @Transactional(readOnly = true)
-    @Cacheable("requesters")
     public List<Requester> findAllByResponsibleTrue() {
         return repository.findResponsibleTrue();
     }
 
     @Transactional(readOnly = true)
-    @Cacheable("requesters")
     public List<Requester> findByBlockedFalse() {
         return repository.findBlockedFalse();
     }

@@ -15,8 +15,8 @@ repositories {
 }
 
 asciidoctor {
-    sourceDir = file('src/docs/asciidoc') // Caminho para a pasta onde os arquivos .adoc estão localizados
-    outputDir = file("$buildDir/docs") // Pasta de saída para os arquivos gerados
+    sourceDir = file('src/docs/asciidoc')
+    outputDir = file("$buildDir/docs")
 }
 
 dependencies {
@@ -66,8 +66,7 @@ dependencies {
     implementation("io.micronaut.email:micronaut-email-sendgrid")
 
     /* cache */
-    implementation("io.micronaut.cache:micronaut-cache-core")
-    implementation("io.micronaut.cache:micronaut-cache-caffeine")
+    implementation("io.micronaut.redis:micronaut-redis-lettuce")
 
     /* reactor*/
     implementation("io.micronaut.reactor:micronaut-reactor")
@@ -81,6 +80,7 @@ dependencies {
     runtimeOnly("org.yaml:snakeyaml")
     aotPlugins platform("io.micronaut.platform:micronaut-platform:4.5.0")
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
+
 }
 
 application {

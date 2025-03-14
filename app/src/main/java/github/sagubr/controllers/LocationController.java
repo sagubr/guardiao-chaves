@@ -1,6 +1,7 @@
 package github.sagubr.controller;
 
 import github.sagubr.annotations.DefaultResponses;
+import github.sagubr.entities.JobTitle;
 import github.sagubr.entities.Location;
 import github.sagubr.services.LocationService;
 import io.micronaut.http.annotation.*;
@@ -41,6 +42,13 @@ public class LocationController {
     @Post(value = "/save")
     public Location createLocation(@Body @Valid Location location) {
         return service.save(location);
+    }
+
+    @Operation(summary = "Atualizar um registro na classe localização")
+    @DefaultResponses
+    @Patch("/update")
+    public Location updateLocation(@Body @Valid Location resource) {
+        return service.update(resource);
     }
 
     @Operation(summary = "Obter todos os registros da classe localização que não sejam restritos e que sejam publicos")

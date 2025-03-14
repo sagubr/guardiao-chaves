@@ -1,4 +1,4 @@
-package github.sagubr.controller;
+package github.sagubr.controllers;
 
 import io.micronaut.serde.annotation.Serdeable;
 

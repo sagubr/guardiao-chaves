@@ -62,7 +62,7 @@ micronaut:
 
 sendgrid:
     enabled: true
-    api-key: ${SENDGRID_API_KEY}
+    api-key: ${SENDGRID_API_KEY:default-api-key}
 
 master:
     username: ${MASTER_USERNAME:admin}
@@ -70,7 +70,7 @@ master:
 
 datasources:
     default:
-        url: ${DEFAULT_DB_URL:jdbc:postgresql://localhost:5434/key_keeper}
+        url: ${DEFAULT_DB_URL:`jdbc:postgresql://localhost:5432/key_keeper`}
         username: ${DEFAULT_DB_USERNAME:postgres}
         password: ${DEFAULT_DB_PASSWORD:postgres}
         driverClassName: org.postgresql.Driver

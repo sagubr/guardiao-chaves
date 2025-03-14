@@ -36,7 +36,6 @@ public class JobTitleService {
     }
 
     @Transactional
-    @CacheInvalidate(value = "key-cache", all = true)
     public JobTitle update(@NotNull JobTitle entity) {
         return repository.findById(entity.getId())
                 .map(existing -> {

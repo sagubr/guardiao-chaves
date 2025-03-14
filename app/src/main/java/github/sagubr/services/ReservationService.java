@@ -31,19 +31,16 @@ public class ReservationService {
     private final PermissionService permissionService;
     private final UserService userService;
 
-    @Cacheable(value = "reservations", parameters = "status")
     public List<Reservation> findByActiveTrueAndStatusIn(List<Status> status) {
         return this.repository.findByActiveTrueAndStatusIn(status);
     }
 
     @Transactional
-    @CacheInvalidate(value = "reservations", all = true)
     public void updateActive(@NotNull UUID id, @NotNull boolean active) {
         repository.updateActive(id, active);
     }
 
     @Transactional
-    @CacheInvalidate(value = "reservations", all = true)
     public void changeStatus(@NotNull ReservationChangeStatusCommand command) {
         Reservation reservation =
                 repository.findById(command.getReservationId()).orElseThrow(EntityNotFoundException::new);
@@ -51,18 +48,15 @@ public class ReservationService {
         repository.save(reservation);
     }
 
-    @Cacheable("reservations")
     public List<Reservation> findByActiveTrue() {
         return repository.findByActiveTrue();
     }
 
-    @Cacheable(value = "reservations", parameters = "id")
     public Optional<Reservation> findById(UUID id) {
         return repository.findById(id);
     }
 
     @Transactional
-    @CacheInvalidate(value = "reservations", all = true)
     public Reservation save(ReservationCommand command, Principal principal) {
 
         User user = userService.findByUsername(principal).orElseThrow();
@@ -98,7 +92,6 @@ public class ReservationService {
     }
 
     @Transactional
-    @CacheInvalidate(value = "reservations", all = true)
     public Reservation update(ReservationProlongationCommand command) {
         return repository.findById(command.getReservationId())
                 .map(existing -> {
@@ -112,7 +105,6 @@ public class ReservationService {
     }
 
     @Transactional
-    @CacheInvalidate(value = "reservations", all = true)
     public Reservation setNotificationTrue(UUID reservationId) {
         Reservation reservation = repository.findById(reservationId).orElseThrow();
         reservation.setNotification(true);
@@ -120,13 +112,11 @@ public class ReservationService {
     }
 
     @Transactional
-    @CacheInvalidate(value = "reservations", all = true)
     public void delete(Reservation entity) {
         repository.delete(entity);
     }
 
     @Transactional
-    @CacheInvalidate(value = "reservations", all = true)
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }

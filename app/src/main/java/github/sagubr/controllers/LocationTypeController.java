@@ -1,12 +1,10 @@
-package github.sagubr.controller;
+package github.sagubr.controllers;
 
 import github.sagubr.annotations.DefaultResponses;
+import github.sagubr.entities.JobTitle;
 import github.sagubr.entities.LocationType;
 import github.sagubr.services.LocationTypeService;
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Post;
+import io.micronaut.http.annotation.*;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.rules.SecurityRule;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,4 +35,12 @@ public class LocationTypeController {
     public LocationType createLocationType(@Body @Valid LocationType locationType) {
         return service.save(locationType);
     }
+
+    @Operation(summary = "Atualizar um registro na classe tipo de ambiente")
+    @DefaultResponses
+    @Patch("/update")
+    public LocationType updateLocationType(@Body @Valid LocationType resource) {
+        return service.update(resource);
+    }
+
 }
