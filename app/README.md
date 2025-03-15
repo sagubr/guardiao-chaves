@@ -36,13 +36,14 @@ app/
 As variáveis sensíveis estão no arquivo `.env`. Exemplo:
 
 ```env
-DEFAULT_DB_URL=jdbc:postgresql://db:5432/key_keeper
-DEFAULT_DB_USERNAME=postgres
-DEFAULT_DB_PASSWORD=postgres
-JWT_TOKEN_SECRET=minha-chave-secreta
+POSTGRES_URL=jdbc:postgresql://db:5432/key_keeper
+POSTGRES_USERNAME=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=key_keeper
+JWT_TOKEN_SECRET=chave??
 MASTER_USERNAME=admin
-MASTER_PASSWORD=123456
-SENDGRID_API_KEY=sua-chave-aqui
+MASTER_PASSWORD=102030
+SENDGRID_API_KEY=chave??
 ```
 
 ## 🚀 Como Executar o Backend
