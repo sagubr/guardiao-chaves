@@ -71,9 +71,14 @@ A API desenvolvida em **Micronaut** fornece:
 2. Configure as variáveis de ambiente no `.env`.
 Exemplo:
 ```env
-DATASOURCES_DEFAULT_URL=jdbc:postgresql://db:5432/key_keeper
-DATASOURCES_DEFAULT_USERNAME=postgres
-DATASOURCES_DEFAULT_PASSWORD=postgres
+POSTGRES_URL=jdbc:postgresql://db:5432/key_keeper
+POSTGRES_USERNAME=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=key_keeper
+JWT_TOKEN_SECRET=chave
+MASTER_USERNAME=admin
+MASTER_PASSWORD=102030
+SENDGRID_API_KEY=chave
 ```
 3. Suba os containers:
    ```sh
