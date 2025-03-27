@@ -77,6 +77,7 @@ export class KeyFormDialogComponent implements OnInit {
 	}
 
 	private create(): void {
+		this.formGroup.get("code")!.enable()
 		this.keyService.createKey(this.formGroup.value).subscribe({
 			next: () => {
 				this.formGroup.reset();
@@ -98,6 +99,7 @@ export class KeyFormDialogComponent implements OnInit {
 					} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
 			},
 		});
+		this.formGroup.get("code")!.disable()
 	}
 
 	private edit(): void {
@@ -141,7 +143,7 @@ export class KeyFormDialogComponent implements OnInit {
 	private buildFormGroup(): void {
 		this.formGroup = this.formBuilder.group({
 			code: [{ value: this.timestampCode, disabled: true, }, Validators.required],
-			keyType: ['', Validators.required],
+			keyType: ['PRINCIPAL'],
 			description: ['', Validators.required],
 			location: [this.data.location]
 		});
