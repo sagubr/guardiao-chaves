@@ -33,7 +33,7 @@ import { Configuration }                                     from '../configurat
 })
 export class PermissionService {
 
-    protected basePath = 'http://localhost:8080';
+    protected basePath = 'http://10.92.21.172:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -94,7 +94,7 @@ export class PermissionService {
     }
 
     /**
-     * Criar uma nova permissão
+     * Criar uma nova permissÃ£o
      * @param permission 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -175,7 +175,7 @@ export class PermissionService {
     }
 
     /**
-     * Excluir permissão por ID
+     * Excluir permissÃ£o por ID
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -246,7 +246,7 @@ export class PermissionService {
     }
 
     /**
-     * Excluir uma permissão
+     * Excluir uma permissÃ£o
      * @param permission 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -327,7 +327,7 @@ export class PermissionService {
     }
 
     /**
-     * Obter todas as permissões
+     * Obter todas as permissÃµes
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -394,7 +394,7 @@ export class PermissionService {
     }
 
     /**
-     * Obter permissão por ID
+     * Obter permissÃ£o por ID
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -465,7 +465,7 @@ export class PermissionService {
     }
 
     /**
-     * Obter todas as permissões por solicitantes
+     * Obter todas as permissÃµes por solicitantes
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -536,7 +536,7 @@ export class PermissionService {
     }
 
     /**
-     * Atualizar uma permissão existente
+     * Atualizar uma permissÃ£o existente
      * @param permission 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

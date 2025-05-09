@@ -31,7 +31,7 @@ import { Configuration }                                     from '../configurat
 })
 export class NotificationsService {
 
-    protected basePath = 'http://localhost:8080';
+    protected basePath = 'http://10.92.21.172:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -92,7 +92,7 @@ export class NotificationsService {
     }
 
     /**
-     * Obter todos os registros da classe notificação que não tenham sido lidos
+     * Obter todos os registros da classe notificaÃ§Ã£o que nÃ£o tenham sido lidos
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -159,7 +159,7 @@ export class NotificationsService {
     }
 
     /**
-     * Marcar o registro de notificação como lida
+     * Marcar o registro de notificaÃ§Ã£o como lida
      * @param notificationId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

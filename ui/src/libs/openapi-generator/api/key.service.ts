@@ -33,7 +33,7 @@ import { Configuration }                                     from '../configurat
 })
 export class KeyService {
 
-    protected basePath = 'http://localhost:8080';
+    protected basePath = 'http://10.92.21.172:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -242,7 +242,7 @@ export class KeyService {
     }
 
     /**
-     * Obter chaves por localização
+     * Obter chaves por localizaÃ§Ã£o
      * @param location 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

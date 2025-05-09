@@ -31,7 +31,7 @@ import { Configuration }                                     from '../configurat
 })
 export class FacilityService {
 
-    protected basePath = 'http://localhost:8080';
+    protected basePath = 'http://10.92.21.172:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -92,7 +92,7 @@ export class FacilityService {
     }
 
     /**
-     * Criar nova instalação
+     * Criar nova instalaÃ§Ã£o
      * @param facility 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -173,7 +173,7 @@ export class FacilityService {
     }
 
     /**
-     * Obter todas as instalações
+     * Obter todas as instalaÃ§Ãµes
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -240,7 +240,7 @@ export class FacilityService {
     }
 
     /**
-     * Atualizar um registro na classe instalação
+     * Atualizar um registro na classe instalaÃ§Ã£o
      * @param facility 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

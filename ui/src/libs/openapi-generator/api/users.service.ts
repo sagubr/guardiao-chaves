@@ -33,7 +33,7 @@ import { Configuration }                                     from '../configurat
 })
 export class UsersService {
 
-    protected basePath = 'http://localhost:8080';
+    protected basePath = 'http://10.92.21.172:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -94,7 +94,7 @@ export class UsersService {
     }
 
     /**
-     * Criar novo registro na classe usuário
+     * Criar novo registro na classe usuÃ¡rio
      * @param user 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -175,7 +175,7 @@ export class UsersService {
     }
 
     /**
-     * Obter todos os registros da classe usuário
+     * Obter todos os registros da classe usuÃ¡rio
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -242,7 +242,7 @@ export class UsersService {
     }
 
     /**
-     * Obter todos os registros da classe usuário resumido
+     * Obter todos os registros da classe usuÃ¡rio resumido
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -309,7 +309,7 @@ export class UsersService {
     }
 
     /**
-     * Atualizar um registro existente na classe usuário
+     * Atualizar um registro existente na classe usuÃ¡rio
      * @param user 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

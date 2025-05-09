@@ -31,7 +31,7 @@ import { Configuration }                                     from '../configurat
 })
 export class RequesterService {
 
-    protected basePath = 'http://localhost:8080';
+    protected basePath = 'http://10.92.21.172:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -392,7 +392,7 @@ export class RequesterService {
     }
 
     /**
-     * Obter todos os registros da classe solicitantes filtrados por responsável&#x3D;true
+     * Obter todos os registros da classe solicitantes filtrados por responsÃ¡vel&#x3D;true
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

@@ -31,7 +31,7 @@ import { Configuration }                                     from '../configurat
 })
 export class LoggingService {
 
-    protected basePath = 'http://localhost:8080';
+    protected basePath = 'http://10.92.21.172:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
