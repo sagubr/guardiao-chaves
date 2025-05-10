@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
                 version = "0.0"
         ),
         servers = @Server(
-                url = "http://localhost:8080/"
+                url = "http://10.92.21.172:8080/"
         ),
         security = @SecurityRequirement(name = "Authorization")
 )
