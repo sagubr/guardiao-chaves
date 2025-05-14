@@ -94,7 +94,7 @@ export class PermissionService {
     }
 
     /**
-     * Criar uma nova permissÃ£o
+     * Criar uma nova permissão
      * @param permission 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -175,7 +175,7 @@ export class PermissionService {
     }
 
     /**
-     * Excluir permissÃ£o por ID
+     * Excluir permissão por ID
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -246,7 +246,7 @@ export class PermissionService {
     }
 
     /**
-     * Excluir uma permissÃ£o
+     * Excluir uma permissão
      * @param permission 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -327,7 +327,7 @@ export class PermissionService {
     }
 
     /**
-     * Obter todas as permissÃµes
+     * Obter todas as permissões
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -394,7 +394,7 @@ export class PermissionService {
     }
 
     /**
-     * Obter permissÃ£o por ID
+     * Obter permissão por ID
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -465,7 +465,7 @@ export class PermissionService {
     }
 
     /**
-     * Obter todas as permissÃµes por solicitantes
+     * Obter todas as permissões por solicitantes
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -536,7 +536,7 @@ export class PermissionService {
     }
 
     /**
-     * Atualizar uma permissÃ£o existente
+     * Atualizar uma permissão existente
      * @param permission 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

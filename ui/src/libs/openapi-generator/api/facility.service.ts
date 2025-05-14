@@ -92,7 +92,7 @@ export class FacilityService {
     }
 
     /**
-     * Criar nova instalaÃ§Ã£o
+     * Criar nova instalação
      * @param facility 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -173,7 +173,7 @@ export class FacilityService {
     }
 
     /**
-     * Obter todas as instalaÃ§Ãµes
+     * Obter todas as instalações
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -240,7 +240,7 @@ export class FacilityService {
     }
 
     /**
-     * Atualizar um registro na classe instalaÃ§Ã£o
+     * Atualizar um registro na classe instalação
      * @param facility 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

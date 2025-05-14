@@ -10,6 +10,7 @@ import github.sagubr.models.UserSummaryDto;
 import github.sagubr.repositories.UserRepository;
 import github.sagubr.security.PasswordEncoder;
 import github.sagubr.security.PasswordGenerator;
+import io.micronaut.core.annotation.NonNull;
 import io.micronaut.data.exceptions.EmptyResultException;
 import io.micronaut.transaction.annotation.ReadOnly;
 import io.micronaut.transaction.annotation.Transactional;
@@ -86,6 +87,16 @@ public class UserService {
         if (saved.isFirstAccess()) {
             this.sendGridEmailService.send(saved.getEmail(), EmailTemplate.BEM_VINDO, Map.of("name", saved.getName(), "password", temporaryPassword)).subscribe();
         }
+        return saved;
+    }
+
+    @Transactional
+    public User resetPassword(@NotNull String username) {
+        Optional<User> user = repository.findByUsername(username);
+        String temporaryPassword = PasswordGenerator.generate(8);
+        user.get().setPassword(passwordEncoder.encode(temporaryPassword));
+        User saved = repository.update(user.get());
+        this.sendGridEmailService.send(saved.getEmail(), EmailTemplate.REDEFINIR_SENHA, Map.of("name", saved.getName(), "password", temporaryPassword)).subscribe();
         return saved;
     }
 }
