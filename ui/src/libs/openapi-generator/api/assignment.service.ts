@@ -94,7 +94,7 @@ export class AssignmentService {
     }
 
     /**
-     * Criar novo registro na classe atribuiÃ§Ã£o
+     * Criar novo registro na classe atribuição
      * @param assignment 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -175,7 +175,7 @@ export class AssignmentService {
     }
 
     /**
-     * Obter todos os registros da classe atribuiÃ§Ã£o
+     * Obter todos os registros da classe atribuição
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -242,7 +242,7 @@ export class AssignmentService {
     }
 
     /**
-     * Criar novo registro na classe atribuiÃ§Ã£o
+     * Criar novo registro na classe atribuição
      * @param assignmentCommand 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

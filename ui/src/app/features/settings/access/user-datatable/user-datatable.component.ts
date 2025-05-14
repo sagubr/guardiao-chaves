@@ -128,7 +128,13 @@ export class UserDatatableComponent implements OnInit, AfterViewInit, OnDestroy 
 				title: "Tem certeza que deseja redefinir a senha?",
 				message: `A senha atual será redefinida e a nova senha será enviada para o e-mail cadastrado: ${ element.email }`,
 				icon: "warning"
-			} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
+			} as DialogWrappedInfo)
+			.afterClosed()
+			.subscribe(res => {
+				if (res) {
+					this.resetPassword(element)
+				}
+			});
 	}
 
 	openBlockUserDialog(element: UserDto): void {
@@ -148,6 +154,26 @@ export class UserDatatableComponent implements OnInit, AfterViewInit, OnDestroy 
 			).subscribe({
 			next: (users) => {
 				this.dataSource.data = users;
+			},
+			error: (err) => {
+				console.error('Error:', err);
+			}
+		});
+	}
+
+	private resetPassword(user: UserDto): void {
+		this.loading = true;
+		this.service.resetPassword(user.username)
+			.pipe(
+				finalize(() => this.loading = false)
+			).subscribe({
+			next: () => {
+				this.dialogWrapped.openFeedback(
+					{
+						title: 'A senha foi redefinida',
+						message: `A nova senha será gerada e enviada para o e-mail cadastrado`,
+						icon: "success"
+					} as DialogWrappedInfo).afterClosed().subscribe(res => console.log(res));
 			},
 			error: (err) => {
 				console.error('Error:', err);

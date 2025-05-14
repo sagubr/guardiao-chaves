@@ -92,7 +92,7 @@ export class LocationService {
     }
 
     /**
-     * Criar novo registro na classe localizaÃ§Ã£o
+     * Criar novo registro na classe localização
      * @param location 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -173,7 +173,7 @@ export class LocationService {
     }
 
     /**
-     * Obter todos os registros da classe localizaÃ§Ã£o
+     * Obter todos os registros da classe localização
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -240,7 +240,7 @@ export class LocationService {
     }
 
     /**
-     * Obter todos os registros da classe localizaÃ§Ã£o filtrados por permissionId
+     * Obter todos os registros da classe localização filtrados por permissionId
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -311,7 +311,7 @@ export class LocationService {
     }
 
     /**
-     * Obter todos os registros da classe localizaÃ§Ã£o filtrados por requesterId
+     * Obter todos os registros da classe localização filtrados por requesterId
      * @param requesterId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -382,7 +382,7 @@ export class LocationService {
     }
 
     /**
-     * Obter todos os registros da classe localizaÃ§Ã£o que nÃ£o sejam restritos e que nÃ£o sejam publicos
+     * Obter todos os registros da classe localização que não sejam restritos e que não sejam publicos
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -449,7 +449,7 @@ export class LocationService {
     }
 
     /**
-     * Obter todos os registros da classe localizaÃ§Ã£o que nÃ£o sejam restritos e que sejam publicos
+     * Obter todos os registros da classe localização que não sejam restritos e que sejam publicos
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -516,7 +516,7 @@ export class LocationService {
     }
 
     /**
-     * Atualizar um registro na classe localizaÃ§Ã£o
+     * Atualizar um registro na classe localização
      * @param location 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
