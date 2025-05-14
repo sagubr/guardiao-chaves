@@ -13,6 +13,17 @@ public enum EmailTemplate {
             return "templates/email/welcome-template.html";
         }
     },
+    REDEFINIR_SENHA {
+        @Override
+        public String subject(String... params) {
+            return "Redefinição de senha";
+        }
+
+        @Override
+        public String content(String... params) {
+            return "templates/email/redefinir-senha.html";
+        }
+    },
     COBRANCA_EMAIL {
         @Override
         public String subject(String... params) {

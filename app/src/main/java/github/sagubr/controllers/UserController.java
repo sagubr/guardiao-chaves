@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 @Secured(SecurityRule.IS_AUTHENTICATED)
 @Tag(name = "Users", description = "Classe referência para Usuário")
@@ -48,6 +49,13 @@ public class UserController {
     @Post(value = "/save")
     public User createUser(@Body @Valid User user) {
         return service.save(user);
+    }
+
+    @Operation(summary = "Redefinir a senha de um registro de usuário")
+    @DefaultResponses
+    @Post(value = "/reset-password")
+    public User resetPassword(@Body @Valid String username) {
+        return service.resetPassword(username);
     }
 
 }
